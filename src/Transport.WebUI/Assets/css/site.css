@@ -1,3 +1,26 @@
 ﻿.navbar-toggler, .navbar-toggler:focus, .navbar-toggler:focus-visible{
   border: none !important;
 }
+
+footer {
+  background-color: var(--t-primary);
+  color: white;
+}
+
+nav{
+  background-color: var(--bs-gray-200);
+}
+
+.navbar-light .navbar-brand {
+  color: var(--t-primary);
+}
+
+.navbar-logo {
+  width: 28px;
+  height: 28px;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-image: url('../img/logo.svg');
+  mask-image: url('../img/logo.svg');
+  background-color: var(--t-primary);
+}
