@@ -1,0 +1,29 @@
+﻿@{
+	var headerLinks = new List<dynamic>() {
+		new {Url = "/", Title="خانه", IconName=""},
+		new {Url = "/Link1", Title="لینک 1", IconName=""}
+	};
+}
+
+<!-- Hamburger Button -->
+<button class="navbar-toggler p-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon fs-6"></span>
+</button>
+
+<div class="collapse navbar-collapse mx-3" id="navbarNav">
+	<ul class="navbar-nav gap-3">
+		@foreach (var headerLink in headerLinks)
+		{
+			<li>
+				<a href="@headerLink.Url" class="nav-link link-secondary">
+					@if (!string.IsNullOrEmpty(headerLink.IconName))
+					{
+						<span><i class="bi bi-@headerLink.IconName"></i></span>
+					}
+
+					<span>@headerLink.Title</span>
+				</a>
+			</li>
+		}
+	</ul>
+</div>

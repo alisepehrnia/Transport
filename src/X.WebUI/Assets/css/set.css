@@ -1,0 +1,28 @@
+/* This css styles is only for Global Styling 
+   It's going to set a custom style after
+   reset.css (hence the name set.css)
+*/
+
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: white;
+}
+
+body {
+  font: normal 1rem 'Vazir';
+}
+
+/* Custom background color for selection */
+::selection {
+  color: black;
+  background: lightblue;
+}
+::-moz-selection {
+  color: black;
+  background: lightblue;
+}
+
+header nav {
+  z-index: 999;
+}

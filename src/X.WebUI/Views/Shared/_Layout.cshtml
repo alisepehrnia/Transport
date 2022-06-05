@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<title>@ViewBag.Title - اپلیکیشن</title>
+
+	<!-- Meta/SEO Tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="robots" content="index, follow" />
+
+	<!-- Fav Icons -->
+	<link rel="shortcut icon" href="~/favicon.ico" />
+
+	@Styles.Render("~/bundles/css")
+	@Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+	@Html.Partial("_Header")
+
+	<main class="container-fluid p-3 my-3" role="main">
+		@RenderBody()
+	</main>
+
+	@Html.Partial("_Footer")
+
+	@Scripts.Render("~/bundles/jquery")
+	@*@Scripts.Render("~/bundles/bootstrap")*@
+	@Scripts.Render("~/bundles/js")
+	@RenderSection("scripts", required: false)
+</body>
+</html>
