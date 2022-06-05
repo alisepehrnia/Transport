@@ -46,13 +46,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\X.Core\X.Core.csproj">
+    <ProjectReference Include="..\..\src\Transport.Core\Transport.Core.csproj">
       <Project>{06474218-6ebd-4adc-aa59-072e7be9a1da}</Project>
-      <Name>X.Core</Name>
+      <Name>Transport.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\X.WebUI\X.WebUI.csproj">
-      <Project>{0ab2dd0b-4758-457d-b6b7-63533f879a3b}</Project>
-      <Name>X.Web</Name>
+    <ProjectReference Include="..\..\src\Transport.WebUI\Trasnsport.WebUI.csproj">
+      <Project>{A00E17B9-39A4-4468-B4EE-72EC8884B823}</Project>
+      <Name>Trasnsport.WebUI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

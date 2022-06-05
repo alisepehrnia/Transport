@@ -48,9 +48,9 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\X.Infrastructure\X.Infrastructure.csproj">
+    <ProjectReference Include="..\..\src\Transport.Infrastructure\Transport.Infrastructure.csproj">
       <Project>{a504dc9d-4e23-4735-8ae9-bf11b5d126ce}</Project>
-      <Name>X.Infrastructure</Name>
+      <Name>Transport.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\UnitTests\UnitTests.csproj">
       <Project>{5b940ab4-99ed-408b-99af-966034386ac9}</Project>
