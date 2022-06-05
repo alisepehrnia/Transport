@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\AppInfoConstants.cs" />
     <Compile Include="Constants\AuthConstants.cs" />
     <Compile Include="Extensions\AppIdentityExtensions\IdentityRoleManagerExtensions.cs" />
     <Compile Include="Extensions\AppIdentityExtensions\IdentityUserManagerExtensions.cs" />

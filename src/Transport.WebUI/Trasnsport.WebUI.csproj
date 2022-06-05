@@ -191,6 +191,12 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Transport.Core\Transport.Core.csproj">
+      <Project>{06474218-6ebd-4adc-aa59-072e7be9a1da}</Project>
+      <Name>Transport.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
