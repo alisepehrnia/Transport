@@ -30,6 +30,7 @@ namespace Transport.WebUI
 				"~/Assets/packages/bootstrap/css/bootstrap.rtl.min.css",
 				"~/Assets/packages/bootstrap-icons/font/bootstrap-icons.min.css",
 				"~/Assets/css/set.css",
+				"~/Assets/css/var.css",
 				"~/Assets/css/site.css"));
 		}
 	}
