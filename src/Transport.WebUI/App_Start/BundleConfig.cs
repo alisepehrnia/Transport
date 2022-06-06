@@ -19,8 +19,8 @@ namespace Transport.WebUI
 			bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
 						"~/Assets/packages/modernizr/modernizr*"));
 
-			bundles.Add(new ScriptBundle("~/bundles/bootstrap")
-				.Include("~/Assets/packages/bootstrap/js/bootstrap.min.js"));
+			//bundles.Add(new ScriptBundle("~/bundles/bootstrap")
+			//	.Include("~/Assets/packages/bootstrap/js/bootstrap.min.js"));
 
 			bundles.Add(new ScriptBundle("~/bundles/js")
 				.Include("~/Assets/js/site.js"));

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-	<title>@ViewBag.Title - اپلیکیشن</title>
+	<title>@ViewBag.Title - @Transport.Core.Constants.AppInfoConstants.AppTitle</title>
 
 	<!-- Meta/SEO Tags -->
 	<meta charset="utf-8" />
@@ -26,8 +26,8 @@
 	@Html.Partial("_Footer")
 
 	@Scripts.Render("~/bundles/jquery")
-	@*@Scripts.Render("~/bundles/bootstrap")*@
 	@Scripts.Render("~/bundles/js")
+	@Scripts.Render("~/Assets/packages/bootstrap/js/bootstrap.min.js")
 	@RenderSection("scripts", required: false)
 </body>
 </html>
