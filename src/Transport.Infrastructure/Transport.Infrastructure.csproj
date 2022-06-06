@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\XContext.cs" />
-    <Compile Include="Data\XContextSeed.cs" />
+    <Compile Include="Data\TransportContext.cs" />
+    <Compile Include="Data\TransportContextSeed.cs" />
     <Compile Include="Identity\AppIdentityDbContext.cs" />
     <Compile Include="Identity\AppIdentityDbContextSeed.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />

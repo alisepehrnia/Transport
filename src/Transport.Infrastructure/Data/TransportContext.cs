@@ -2,9 +2,9 @@
 
 namespace Transport.Infrastructure.Data
 {
-	public class XContext : DbContext
+	public class TransportContext : DbContext
 	{
-		public XContext(string nameOrConnectionString) : base(nameOrConnectionString)
+		public TransportContext(string nameOrConnectionString) : base(nameOrConnectionString)
 		{
 		}
 
