@@ -5,7 +5,7 @@ namespace Transport.Infrastructure.Identity
 {
 	public class AppIdentityDbContext : IdentityDbContext<ApplicationUser>
 	{
-		public AppIdentityDbContext() : base()
+		public AppIdentityDbContext() : base("DefaultConnection", throwIfV1Schema: false)
 		{
 		}
 
@@ -15,6 +15,11 @@ namespace Transport.Infrastructure.Identity
 			// Customize the ASP.NET Identity model and override the defaults if needed.
 			// For example, you can rename the ASP.NET Identity table names and more.
 			// Add your customizations after calling base.OnModelCreating(builder);
+		}
+
+		public static AppIdentityDbContext Create()
+		{
+			return new AppIdentityDbContext();
 		}
 	}
 }
