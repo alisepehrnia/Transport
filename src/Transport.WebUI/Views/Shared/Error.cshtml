@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+	ViewBag.Title = "خطا";
+}
+
+<!DOCTYPE html>
 <html dir="rtl" lang="fa">
 <head>
 	<title>خطا!</title>
@@ -8,9 +14,9 @@
 	@Styles.Render("~/bundles/css")
 </head>
 <body>
-    <hgroup>
-        <h1>خطا.</h1>
-        <h2>خطایی در هنگام پردازش درخواست رخ داده است.</h2>
-    </hgroup>
+	<hgroup>
+		<h1>خطا.</h1>
+		<h2>خطایی در هنگام پردازش درخواست رخ داده است.</h2>
+	</hgroup>
 </body>
 </html>

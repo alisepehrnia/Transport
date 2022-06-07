@@ -1,33 +1,25 @@
 ﻿<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-	<title>@ViewBag.Title - @Transport.Core.Constants.AppInfoConstants.AppTitle</title>
-
-	<!-- Meta/SEO Tags -->
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="index, follow" />
-
-	<!-- Fav Icons -->
-	<link rel="shortcut icon" href="~/favicon.ico" />
-
-	@Styles.Render("~/bundles/css")
-	@Scripts.Render("~/bundles/modernizr")
+	@Html.Partial("_SEOPartial")
+	@Html.Partial("_HeadPartial")
 </head>
-<body>
+<body class="d-flex flex-column">
 	@Html.Partial("_Header")
 
-	<main class="container-fluid p-3 my-3" role="main">
-		@RenderBody()
-	</main>
+	<div class="container-fluid p-4">
+		<div class="row">
+			@Html.Partial("_Sidebar")
+
+			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+				@RenderBody()
+			</main>
+		</div>
+	</div>
 
 	@Html.Partial("_Footer")
 
-	@Scripts.Render("~/bundles/jquery")
-	@Scripts.Render("~/bundles/js")
-	@Scripts.Render("~/Assets/packages/bootstrap/js/bootstrap.min.js")
+	@Html.Partial("_BodyScriptsPartial")
 	@RenderSection("scripts", required: false)
 </body>
 </html>

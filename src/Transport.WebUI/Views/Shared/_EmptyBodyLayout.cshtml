@@ -1,0 +1,12 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	@Html.Partial("_SEOPartial")
+	@Html.Partial("_HeadPartial")
+</head>
+<body class="d-flex justify-content-center align-items-center">
+	@RenderBody()
+	@Html.Partial("_BodyScriptsPartial")
+	@RenderSection("scripts", required: false)
+</body>
+</html>

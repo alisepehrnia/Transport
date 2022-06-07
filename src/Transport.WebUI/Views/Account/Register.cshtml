@@ -1,0 +1,59 @@
+﻿@using Trasnsport.WebUI.ViewModels.Account
+@using Transport.Core.Constants
+@using System.Web.Optimization
+
+@model RegisterViewModel
+
+@{
+	ViewBag.Title = "ثبت‌نام";
+	Layout = @"~/Views/Account/_LoginLayout.cshtml";
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.Partial("_LoginBrandPartial")
+
+<div class="login-box">
+	<h4 class="text-center">ساخت حساب کاربری</h4>
+
+	@Html.ValidationSummary("", new { @class = "text-danger" })
+
+	@{
+		var labelClasses = "control-label login-input-label";
+		var inputClasses = "form-control ltr";
+	}
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Email, new { @class = labelClasses })
+		<div class="col">
+			@Html.TextBoxFor(m => m.Email, new { @class = inputClasses })
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Password, new { @class = labelClasses })
+		<div class="col">
+			@Html.PasswordFor(m => m.Password, new { @class = inputClasses })
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.ConfirmPassword, new { @class = labelClasses })
+		<div class="col">
+			@Html.PasswordFor(m => m.ConfirmPassword, new { @class = inputClasses })
+		</div>
+	</div>
+
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary btn-t-primary w-100" value="ثبت‌نام" />
+	</div>
+
+	<div class="form-group">
+		@Html.ActionLink("ورود به حساب کاربری", "Login", "Account")
+	</div>
+</div>
+
+	@Html.Partial("_LoginFooterPartial")
+}

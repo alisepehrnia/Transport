@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	@Html.Partial("_SEOPartial")
+	@Html.Partial("_HeadPartial")
+	@Styles.Render("~/bundles/sass-login")
+</head>
+<body class="d-flex justify-content-center align-items-center">
+
+	<main class="login-form">
+		<section id="loginForm">
+			@RenderBody()
+		</section>
+	</main>
+
+	@Html.Partial("_BodyScriptsPartial")
+	@RenderSection("scripts", required: false)
+	@section Scripts {
+		@Scripts.Render("~/bundles/jqueryval")
+	}
+</body>
+</html>
