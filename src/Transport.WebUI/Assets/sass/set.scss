@@ -1,0 +1,60 @@
+/* This css styles is only for Global Styling 
+   It's going to set a custom style after
+   reset.css (hence the name set.scss)
+*/
+
+@import 'extend.scss';
+@import 'color.scss';
+@import 'global.scss';
+
+$selection-background-color: $color-primary-dim;
+$selection-color: black;
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+html, body {
+    height: 100%;
+}
+
+header nav {
+    z-index: 999;
+}
+
+/* Custom background color for selection */
+@mixin selection-color-reset() {
+    color: $selection-color;
+    background: $selection-background-color;
+}
+
+::selection {
+    @include selection-color-reset();
+}
+
+::-moz-selection {
+    @include selection-color-reset();
+}
+
+.navbar-toggler, .navbar-toggler:focus, .navbar-toggler:focus-visible {
+    @extend %border-none;
+}
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+    @include hover-opacity($dim-opacity);
+
+    &:hover {
+        color: $color-primary;
+    }
+}
+
+* {
+    line-height: 1.5rem;
+}
+
+a, p, i, b h1, h2, h3, h4, h5, h6 {
+    padding: 0.1rem;
+}

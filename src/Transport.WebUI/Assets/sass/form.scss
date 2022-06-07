@@ -1,0 +1,15 @@
+﻿@import 'color.scss';
+@import 'global.scss';
+
+.form-group {
+  margin-top: 1rem !important;
+}
+
+.form-control{
+  border-radius: $border-radius-huge;
+}
+
+.form-control:focus {
+  border-color: $color-primary;
+  @extend %shadow-none;
+}

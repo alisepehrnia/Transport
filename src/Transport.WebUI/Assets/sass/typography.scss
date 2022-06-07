@@ -1,0 +1,14 @@
+﻿$font-stack: 'Vazir', sans-serif;
+$default-font-weight: 400;
+$default-font-size: 0.9rem;
+$default-color: black;
+$font-secondary-color: white;
+
+body {
+    font: $default-font-weight $default-font-size $font-stack;
+    color: $default-color;
+}
+
+.text-small {
+    font-size: 90%;
+}

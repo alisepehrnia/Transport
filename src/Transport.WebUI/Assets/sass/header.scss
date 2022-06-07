@@ -1,0 +1,64 @@
+﻿@import 'color.scss';
+@import 'extend.scss';
+@import 'global.scss';
+@import 'typography.scss';
+
+$nav-logo-size: 32px;
+$nav-logo-url: url('../img/logo.svg');
+$dropdown-menu-border: $border-light-gray;
+$dropdown-menu-border-radius: $border-radius-small;
+
+nav {
+    background-color: $color-primary;
+}
+
+.navbar-dark {
+    .navbar-brand {
+        color: $font-secondary-color;
+        @include hover-opacity($dim-opacity);
+
+        &:hover {
+            color: $font-secondary-color;
+        }
+    }
+}
+
+.navbar-logo {
+    @include svg-logo($font-secondary-color, $nav-logo-size, $nav-logo-size, $nav-logo-url);
+}
+
+.dropdown-toggle {
+    color: $light-gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    gap: 0.25rem;
+    @include hover-opacity($dim-opacity);
+
+    &:hover {
+        color: $light-gray;
+    }
+}
+
+.navbar-nav .dropdown-menu {
+    direction: rtl;
+    position: absolute;
+    transform: translateX(0.5rem);
+    border: $dropdown-menu-border;
+    border-radius: $dropdown-menu-border-radius;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    margin: 0.25rem 0;
+}
+
+.dropdown-item:active {
+    background-color: $color-primary;
+}
+
+.dropdown-divider {
+    margin: 0.5rem 1rem;
+    border-top: $border-light-gray;
+}

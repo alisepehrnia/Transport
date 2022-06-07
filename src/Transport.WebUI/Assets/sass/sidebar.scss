@@ -1,0 +1,17 @@
+﻿@import 'extend.scss';
+@import 'global.scss';
+@import 'color.scss';
+
+.sidebar {
+    position: fixed;
+    top: 4rem;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    border-left: $border-light-gray;
+
+    .nav-link {
+        color: $color-primary-dark;
+        @include hover-opacity($dim-opacity);
+    }
+}

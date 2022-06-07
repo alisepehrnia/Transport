@@ -1,0 +1,29 @@
+﻿%border-none {
+    border: none !important;
+}
+
+%shadow-none {
+    box-shadow: none !important;
+}
+
+.ltr {
+    direction: ltr !important;
+}
+
+@mixin svg-logo($color, $width, $height, $url) {
+    background-color: $color;
+    width: $width;
+    height: $height;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-image: $url;
+    mask-image: $url;
+}
+
+@mixin hover-opacity($opacity){
+    opacity: $opacity;
+
+    &:hover{
+        opacity: 1;
+    }
+}

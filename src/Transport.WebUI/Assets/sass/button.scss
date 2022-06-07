@@ -1,0 +1,24 @@
+﻿@import 'color.scss';
+@import 'typography.scss';
+@import 'global.scss';
+
+.btn-primary {
+    color: $font-secondary-color;
+    background-color: $color-primary !important;
+    border-color: $color-primary !important;
+}
+
+/* Catches All btn-something classes */
+[class*="btn-"] {
+    &:hover, &:focus, &:active:focus {
+        opacity: 1;
+        @extend %shadow-none;
+    }
+}
+
+.btn {
+    padding: 0.5rem 1.25rem;
+    margin: 0.25rem;
+    border-radius: $border-radius-huge;
+    opacity: $dim-opacity;
+}
