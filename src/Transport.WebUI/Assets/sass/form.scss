@@ -9,6 +9,10 @@
   border-radius: $border-radius-huge;
 }
 
+input.form-control {
+    font-size: 90%;
+}
+
 .form-control:focus {
   border-color: $color-primary;
   @extend %shadow-none;
