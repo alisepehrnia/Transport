@@ -2,12 +2,12 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Transport.Core.Entities;
 
-namespace Transport.Infrastructure.Identity
+namespace Transport.Infrastructure.Data.DataAccess
 {
-	public class AppIdentityDbContext : IdentityDbContext<ApplicationUser>
+	public class AppIdentityDbContext : IdentityDbContext<AppUser>
 	{
 		public AppIdentityDbContext() : base("name=TransportConnectionString", throwIfV1Schema: false)
-		{	
+		{
 		}
 
 		protected override void OnModelCreating(DbModelBuilder builder)

@@ -15,45 +15,54 @@
 
 	@Html.Partial("_LoginBrandPartial")
 
-<div class="login-box">
-	<h4 class="text-center">ساخت حساب کاربری</h4>
+	<div class="login-box">
+		<h4 class="text-center">ساخت حساب کاربری</h4>
 
-	@Html.ValidationSummary("", new { @class = "text-danger" })
+		@Html.ValidationSummary("", new { @class = "text-danger" })
 
-	@{
-		var labelClasses = "control-label login-input-label";
-		var inputClasses = "form-control ltr";
-	}
+		@{
+			var labelClasses = "control-label login-input-label";
+			var inputClasses = "form-control ltr";
+		}
 
-	<div class="form-group">
-		@Html.LabelFor(m => m.Email, new { @class = labelClasses })
-		<div class="col">
-			@Html.TextBoxFor(m => m.Email, new { @class = inputClasses })
+		@if (ViewBag.RegisterDone == true)
+		{
+			<div class="form-group">
+				<div class="col">
+					<p class="text-success">کاربری جدید با موفقیت اضافه شد!</p>
+				</div>
+			</div>
+		}
+
+		<div class="form-group">
+			@Html.LabelFor(m => m.UserName, new { @class = labelClasses })
+			<div class="col">
+				@Html.TextBoxFor(m => m.UserName, new { @class = inputClasses })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(m => m.Password, new { @class = labelClasses })
+			<div class="col">
+				@Html.PasswordFor(m => m.Password, new { @class = inputClasses })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(m => m.ConfirmPassword, new { @class = labelClasses })
+			<div class="col">
+				@Html.PasswordFor(m => m.ConfirmPassword, new { @class = inputClasses })
+			</div>
+		</div>
+
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary btn-t-primary w-100" value="ثبت‌نام" />
+		</div>
+
+		<div class="form-group">
+			@Html.ActionLink("ورود به حساب کاربری", "Login", "Account")
 		</div>
 	</div>
-
-	<div class="form-group">
-		@Html.LabelFor(m => m.Password, new { @class = labelClasses })
-		<div class="col">
-			@Html.PasswordFor(m => m.Password, new { @class = inputClasses })
-		</div>
-	</div>
-
-	<div class="form-group">
-		@Html.LabelFor(m => m.ConfirmPassword, new { @class = labelClasses })
-		<div class="col">
-			@Html.PasswordFor(m => m.ConfirmPassword, new { @class = inputClasses })
-		</div>
-	</div>
-
-	<div class="form-group">
-		<input type="submit" class="btn btn-primary btn-t-primary w-100" value="ثبت‌نام" />
-	</div>
-
-	<div class="form-group">
-		@Html.ActionLink("ورود به حساب کاربری", "Login", "Account")
-	</div>
-</div>
 
 	@Html.Partial("_LoginFooterPartial")
 }

@@ -3,35 +3,37 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Transport.Infrastructure.Identity;
 using Transport.Infrastructure.Services.Identity;
+using Trasnsport.WebUI.App_Start;
 using Trasnsport.WebUI.ViewModels.Account;
+using Transport.Core.Extensions.AppIdentityExtensions;
+using Transport.Core.Entities;
 
 namespace Trasnsport.WebUI.Controllers
 {
 	[Authorize]
 	public class AccountController : CustomController
 	{
-		private ApplicationSignInManager _signInManager;
-		private ApplicationUserManager _userManager;
-		private ApplicationRoleManager _roleManager;
+		private AppSignInManager _signInManager;
+		private AppUserManager _userManager;
+		private AppRoleManager _roleManager;
 
 		public AccountController()
 		{
 		}
 
-		public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager)
+		public AccountController(AppUserManager userManager, AppSignInManager signInManager, AppRoleManager roleManager)
 		{
 			UserManager = userManager;
 			SignInManager = signInManager;
 			_roleManager = roleManager;
 		}
 
-		public ApplicationSignInManager SignInManager
+		public AppSignInManager SignInManager
 		{
 			get
 			{
-				return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+				return _signInManager ?? HttpContext.GetOwinContext().Get<AppSignInManager>();
 			}
 			private set
 			{
@@ -39,11 +41,11 @@ namespace Trasnsport.WebUI.Controllers
 			}
 		}
 
-		public ApplicationUserManager UserManager
+		public AppUserManager UserManager
 		{
 			get
 			{
-				return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+				return _userManager ?? HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
 			}
 			private set
 			{
@@ -51,11 +53,11 @@ namespace Trasnsport.WebUI.Controllers
 			}
 		}
 
-		public ApplicationRoleManager RoleManager
+		public AppRoleManager RoleManager
 		{
 			get
 			{
-				return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+				return _roleManager ?? HttpContext.GetOwinContext().Get<AppRoleManager>();
 			}
 			private set
 			{
@@ -85,9 +87,7 @@ namespace Trasnsport.WebUI.Controllers
 				return View(model);
 			}
 
-			// This doesn't count login failures towards account lockout
-			// To enable password failures to trigger account lockout, change to shouldLockout: true
-			var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+			var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
 			switch (result)
 			{
 				case SignInStatus.Success:
@@ -118,19 +118,15 @@ namespace Trasnsport.WebUI.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-				var result = await UserManager.CreateAsync(user, model.Password);
+				var user = new AppUser { UserName = model.UserName };
+				var result = await UserManager.AddUser(model.UserName, model.Password);
 				if (result.Succeeded)
 				{
-					await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+					//await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+					//return RedirectToAction("Index", "Home");
 
-					// For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-					// Send an email with this link
-					// string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-					// var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-					// await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-					return RedirectToAction("Index", "Home");
+					ViewBag.RegisterDone = true;
+					return View();
 				}
 				AddErrors(result);
 			}
@@ -139,6 +135,14 @@ namespace Trasnsport.WebUI.Controllers
 			return View(model);
 		}
 
+		[AllowAnonymous]
+		//
+		// GET /Account/AddUsers
+		public async Task<string> AddUsers()
+		{
+			await AppIdentityDbContextSeed.Init();
+			return "Done!";
+		}
 
 		//
 		// POST: /Account/LogOff

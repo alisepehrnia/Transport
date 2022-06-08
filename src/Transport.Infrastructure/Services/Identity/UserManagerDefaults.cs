@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.DataProtection;
-using Transport.Infrastructure.Identity;
+using Transport.Core.Entities;
 
 namespace Transport.Infrastructure.Services.Identity
 {
 	public static class UserManagerDefaults
 	{
-		public static UserValidator<ApplicationUser> GetDefaultUserValidator(ApplicationUserManager manager)
+		public static UserValidator<AppUser> GetDefaultUserValidator(AppUserManager manager)
 		{
-			return new UserValidator<ApplicationUser>(manager)
+			return new UserValidator<AppUser>(manager)
 			{
-				AllowOnlyAlphanumericUserNames = false,
-				RequireUniqueEmail = true,
+				AllowOnlyAlphanumericUserNames = true,
+				RequireUniqueEmail = false
 			};
 		}
 
@@ -20,9 +20,9 @@ namespace Transport.Infrastructure.Services.Identity
 		{
 		};
 
-		public static DataProtectorTokenProvider<ApplicationUser> GetDefaultDataProtectorTokenProvider(IDataProtectionProvider protectionProvider)
+		public static DataProtectorTokenProvider<AppUser> GetDefaultDataProtectorTokenProvider(IDataProtectionProvider protectionProvider)
 		{
-			return new DataProtectorTokenProvider<ApplicationUser>(protectionProvider.Create("ASP.NET Identity"));
+			return new DataProtectorTokenProvider<AppUser>(protectionProvider.Create("ASP.NET Identity"));
 		}
 	}
 }

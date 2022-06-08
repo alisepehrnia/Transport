@@ -27,10 +27,10 @@
 	}
 
 	<div class="form-group">
-		@Html.LabelFor(m => m.Email, new { @class = labelClasses })
+		@Html.LabelFor(m => m.UserName, new { @class = labelClasses })
 		<div class="col">
-			@Html.TextBoxFor(m => m.Email, new { @class = inputClasses })
-			@Html.ValidationMessageFor(m => m.Email, "", new { @class = validationMessageClasses })
+			@Html.TextBoxFor(m => m.UserName, new { @class = inputClasses })
+			@Html.ValidationMessageFor(m => m.UserName, "", new { @class = validationMessageClasses })
 		</div>
 	</div>
 

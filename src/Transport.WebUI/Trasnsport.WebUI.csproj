@@ -170,7 +170,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BackdoorController.cs" />
     <Compile Include="Controllers\CustomController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Startup.Auth.cs" />
@@ -185,7 +184,6 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Account\RoleViewModel.cs" />
-    <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
     <Compile Include="ViewModels\Manage\IndexViewModel.cs" />
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
   </ItemGroup>

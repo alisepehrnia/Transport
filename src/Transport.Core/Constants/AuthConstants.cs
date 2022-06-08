@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Transport.Core.Constants
 {
-	static public class AuthConstants
+	public static class AuthConstants
 	{
 		public static TimeSpan JWTTokenExpireDuration = new TimeSpan(7, 0, 0, 0); // 7 Days
 		public const string JWTTokenKeyString = "r4We@g3hfg235Sd2Klq8@kcmwLsSo}q1";

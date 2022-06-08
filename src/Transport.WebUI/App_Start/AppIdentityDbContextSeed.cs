@@ -1,36 +1,30 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using Transport.Core.Enums;
+using Transport.Core.Extensions;
 using Transport.Core.Extensions.AppIdentityExtensions;
-using Transport.Infrastructure.Identity;
 using Transport.Infrastructure.Services.Identity;
 
 namespace Trasnsport.WebUI.App_Start
 {
 	public class AppIdentityDbContextSeed
 	{
-		const string emailFormat = "{0}@t";
-		const string passwordFormat = "{0}";
-
-		private static string FormatEmail(string name) => string.Format(emailFormat, name);
-		private static string FormatPassword(string name) => string.Format(passwordFormat, name);
-
 		/// <summary>
 		/// Add Default Users & Roles
 		/// </summary>
 		public static async Task Init()
 		{
 			var userManager = HttpContext.Current.GetOwinContext()
-				.GetUserManager<ApplicationUserManager>();
+				.GetUserManager<AppUserManager>();
 
 			var roleManager = HttpContext.Current.GetOwinContext()
-				.Get<ApplicationRoleManager>();
+				.Get<AppRoleManager>();
 
-			foreach (var roleName in Enum.GetNames(typeof(ApplicationRole)))
+			foreach (var role in EnumExtensions.ToDictionary<UserRoles>())
 			{
-				await roleManager.CreateAsync(new ApplicationRole() { Name = roleName });
-				await userManager.AddUser(FormatEmail(roleName), FormatPassword(roleName), roleName);
+				var username = role.Value.ToLower();
+				await userManager.AddUser(username, username, roleManager, role.Value, role.Key);
 			}
 		}
 	}

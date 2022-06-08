@@ -4,7 +4,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using Transport.Infrastructure.Identity;
+using Transport.Core.Entities;
+using Transport.Infrastructure.Data.DataAccess;
 using Transport.Infrastructure.Services.Identity;
 
 namespace Trasnsport.WebUI
@@ -16,9 +17,9 @@ namespace Trasnsport.WebUI
 		{
 			// Configure the db context, user manager and signin manager to use a single instance per request
 			app.CreatePerOwinContext(AppIdentityDbContext.Create);
-			app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-			app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
-			app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
+			app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
+			app.CreatePerOwinContext<AppSignInManager>(AppSignInManager.Create);
+			app.CreatePerOwinContext<AppRoleManager>(AppRoleManager.Create);
 
 			// Enable the application to use a cookie to store information for the signed in user
 			// and to use a cookie to temporarily store information about a user logging in with a third party login provider
@@ -31,7 +32,7 @@ namespace Trasnsport.WebUI
 				{
 					// Enables the application to validate the security stamp when the user logs in.
 					// This is a security feature which is used when you change a password or add an external login to your account.  
-					OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+					OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<AppUserManager, AppUser>(
 						validateInterval: TimeSpan.FromMinutes(30),
 						regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
 				}

@@ -3,20 +3,21 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Transport.Core.Constants;
-using Transport.Infrastructure.Identity;
+using Transport.Core.Entities;
+using Transport.Infrastructure.Data.DataAccess;
 
 namespace Transport.Infrastructure.Services.Identity
 {
 	// Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-	public class ApplicationUserManager : UserManager<ApplicationUser>
+	public class AppUserManager : UserManager<AppUser>
 	{
-		public ApplicationUserManager(IUserStore<ApplicationUser> store) : base(store)
+		public AppUserManager(IUserStore<AppUser> store) : base(store)
 		{
 		}
 
-		public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+		public static AppUserManager Create(IdentityFactoryOptions<AppUserManager> options, IOwinContext context)
 		{
-			var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<AppIdentityDbContext>()));
+			var manager = new AppUserManager(new UserStore<AppUser>(context.Get<AppIdentityDbContext>()));
 
 			// Configure validation logic for usernames
 			manager.UserValidator = UserManagerDefaults.GetDefaultUserValidator(manager);

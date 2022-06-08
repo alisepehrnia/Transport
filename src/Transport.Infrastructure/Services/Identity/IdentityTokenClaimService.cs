@@ -7,14 +7,15 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Transport.Core.Constants;
 using Transport.Core.Interfaces;
+using Transport.Core.Entities;
 
-namespace Transport.Infrastructure.Identity
+namespace Transport.Infrastructure.Services.Identity
 {
 	public class IdentityTokenClaimService : ITokenClaimsService
 	{
-		private readonly UserManager<ApplicationUser> _userManager;
+		private readonly UserManager<AppUser> _userManager;
 
-		public IdentityTokenClaimService(UserManager<ApplicationUser> userManager)
+		public IdentityTokenClaimService(UserManager<AppUser> userManager)
 		{
 			_userManager = userManager;
 		}

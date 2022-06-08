@@ -48,30 +48,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\TransportContext.cs" />
-    <Compile Include="Data\TransportContextSeed.cs" />
-    <Compile Include="Identity\AppIdentityDbContext.cs" />
-    <Compile Include="Identity\ApplicationRole.cs" />
-    <Compile Include="Identity\ApplicationUser.cs" />
-    <Compile Include="Identity\IdentityTokenClaimService.cs" />
+    <Compile Include="Data\TransportRepository.cs" />
+    <Compile Include="Data\DataAccess\TransportContext.cs" />
+    <Compile Include="Data\DataAccess\TransportContextSeed.cs" />
+    <Compile Include="Data\DataAccess\AppIdentityDbContext.cs" />
+    <Compile Include="Services\Identity\IdentityTokenClaimService.cs" />
     <Compile Include="Logging\LoggerAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Identity\ApplicationSignInManager.cs" />
-    <Compile Include="Services\Identity\ApplicationRoleManager.cs" />
-    <Compile Include="Services\Identity\ApplicationUserManager.cs" />
+    <Compile Include="Services\Identity\AppSignInManager.cs" />
+    <Compile Include="Services\Identity\AppRoleManager.cs" />
+    <Compile Include="Services\Identity\AppUserManager.cs" />
     <Compile Include="Services\Identity\UserManagerDefaults.cs" />
+    <Compile Include="Services\UserInfoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Config\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="Data\Queries\" />
     <Folder Include="Dependencies\" />
-    <Folder Include="Identity\Migrations\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Ardalis.Specification">
+      <Version>6.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Ardalis.Specification.EntityFramework6">
+      <Version>6.0.1</Version>
+    </PackageReference>
     <PackageReference Include="EntityFramework">
       <Version>6.4.4</Version>
     </PackageReference>

@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using Transport.Core.Entities;
 
-namespace Transport.Infrastructure.Data
+namespace Transport.Infrastructure.Data.DataAccess
 {
 	public class TransportContext : DbContext
 	{

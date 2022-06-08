@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Transport.Core.Enums
+@using Transport.Core.Services
 
 @{
 	var dropdownItemClasses = "dropdown-item";
@@ -8,12 +10,15 @@
 	<div class="dropdown ltr">
 		<a href="" class="dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 			<i class="bi bi-person-circle fs-2 mx-1"></i>
-			@Html.Encode(User.Identity.GetUserName().Split('@')[0])
+			@Html.Encode(User.Identity.GetUserName())
 		</a>
 
 		<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-			<li>@Html.ActionLink("سفر جدید...", "Request", controllerName: "Travel", routeValues: null, htmlAttributes: new { @class = dropdownItemClasses })</li>
-			<li>@Html.ActionLink("پروفایل", "Index", controllerName: "Manage", routeValues: null, htmlAttributes: new { @class = dropdownItemClasses })</li>
+			@if (UserPremissionsCheckService.CanTransportRequest(Context.User))
+			{
+				<li>@Html.ActionLink("سفر جدید...", "Request", controllerName: "Travel", routeValues: null, htmlAttributes: new { @class = dropdownItemClasses })</li>
+			}
+			@*<li>@Html.ActionLink("پروفایل", "Index", controllerName: "Manage", routeValues: null, htmlAttributes: new { @class = dropdownItemClasses })</li>*@
 			<li><hr class="dropdown-divider"></li>
 			<li>
 				@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
