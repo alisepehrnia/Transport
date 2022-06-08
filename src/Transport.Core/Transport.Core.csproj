@@ -55,7 +55,7 @@
     <Compile Include="Enums\UserRoleNames.cs" />
     <Compile Include="Entities\Request.cs" />
     <Compile Include="Entities\TransportRequest.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserInfo.cs" />
     <Compile Include="Entities\UserRoleLevel.cs" />
   </ItemGroup>
   <ItemGroup>

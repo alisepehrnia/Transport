@@ -12,7 +12,7 @@ namespace Transport.Infrastructure.Data
 			base.OnModelCreating(builder);
 		}
 
-		public DbSet<User> Users { get; set; }
+		public DbSet<UserInfo> Users { get; set; }
 		public DbSet<UserRole> UserRoles { get; set; }
 		public DbSet<UserRoleLevel> UserRoleLevels { get; set; }
 		public DbSet<TransportRequest> TransportRequests { get; set; }

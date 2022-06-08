@@ -14,15 +14,17 @@ namespace Trasnsport.WebUI.Controllers
 	{
 		private ApplicationSignInManager _signInManager;
 		private ApplicationUserManager _userManager;
+		private ApplicationRoleManager _roleManager;
 
 		public AccountController()
 		{
 		}
 
-		public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+		public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager)
 		{
 			UserManager = userManager;
 			SignInManager = signInManager;
+			_roleManager = roleManager;
 		}
 
 		public ApplicationSignInManager SignInManager
@@ -46,6 +48,18 @@ namespace Trasnsport.WebUI.Controllers
 			private set
 			{
 				_userManager = value;
+			}
+		}
+
+		public ApplicationRoleManager RoleManager
+		{
+			get
+			{
+				return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+			}
+			private set
+			{
+				_roleManager = value;
 			}
 		}
 
@@ -89,7 +103,7 @@ namespace Trasnsport.WebUI.Controllers
 
 		//
 		// GET: /Account/Register
-		[AllowAnonymous]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Register()
 		{
 			return View();
@@ -98,7 +112,7 @@ namespace Trasnsport.WebUI.Controllers
 		//
 		// POST: /Account/Register
 		[HttpPost]
-		[AllowAnonymous]
+		[Authorize(Roles = "Admin")]
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Register(RegisterViewModel model)
 		{
@@ -135,7 +149,6 @@ namespace Trasnsport.WebUI.Controllers
 			AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 			return RedirectToAction("Login", "Account");
 		}
-
 
 		protected override void Dispose(bool disposing)
 		{

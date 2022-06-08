@@ -13,6 +13,6 @@ namespace Transport.Core.Entities
 
 		[Required]
 		//FK: UserId
-		public virtual User Issuer { get; set; }
+		public virtual UserInfo Issuer { get; set; }
 	}
 }

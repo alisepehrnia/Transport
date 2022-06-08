@@ -8,7 +8,7 @@ namespace Transport.Core.Entities
 	{
 		public TransportRequest()
 		{
-			Persons = new HashSet<User>();
+			Persons = new HashSet<UserInfo>();
 		}
 
 		[Required]
@@ -17,6 +17,6 @@ namespace Transport.Core.Entities
 		[Required]
 		public string Address { get; set; }
 
-		public virtual ICollection<User> Persons { get; set; }
+		public virtual ICollection<UserInfo> Persons { get; set; }
 	}
 }

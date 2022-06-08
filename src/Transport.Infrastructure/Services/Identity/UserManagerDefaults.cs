@@ -18,7 +18,6 @@ namespace Transport.Infrastructure.Services.Identity
 
 		public static PasswordValidator PasswordValidator => new PasswordValidator
 		{
-			RequiredLength = 8
 		};
 
 		public static DataProtectorTokenProvider<ApplicationUser> GetDefaultDataProtectorTokenProvider(IDataProtectionProvider protectionProvider)
