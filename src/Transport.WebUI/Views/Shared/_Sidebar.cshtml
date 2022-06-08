@@ -1,20 +1,37 @@
-﻿<nav id="sidebarMenu" class="col-md-3 col-lg-2 col-4 sidebar bg-light">
+﻿@using Transport.Core.Services
+@using Transport.Core.Enums
+@using Transport.Core.Extensions
+
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 col-4 sidebar bg-light">
 	<div class="position-sticky pt-3">
 		<ul class="nav flex-column gap-2">
 
-			<li class="nav-item">
-				<a class="nav-link active" aria-current="page" href="/">
-					<i class="bi bi-house-fill fs-5"></i>
-					صفحه اصلی
-				</a>
-			</li>
+			@helper LinkGenerator(string text, string iconName, string href)
+			{
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="@href">
+						<i class="bi bi-@iconName-fill fs-5"></i>
+						@text
+					</a>
+				</li>
+			}
 
-			<li class="nav-item">
-				<a class="nav-link" href="~/Transport/Requests">
-					<i class="bi bi-archive-fill fs-5"></i>
-					درخواست‌ها
-				</a>
-			</li>
+			@LinkGenerator("صفحه اصلی", "house", "")
+
+			@if (UserPremissionsCheckService.CanTransportRequest(Context.User))
+			{
+				@LinkGenerator("درخواست جدید", "plus-circle", Url.Action("NewRequest", "Transport"))
+			}
+
+			@if (UserPremissionsCheckService.CanTransportRequest(Context.User) || UserPremissionsCheckService.CanApproveTransportRequest(Context.User))
+			{
+				@LinkGenerator("درخواست‌ها", "archive", Url.Action("Requests", "Transport"))
+			}
+
+			@if (Context.User.IsInRole(UserRoles.Admin))
+			{
+				@LinkGenerator("کاربر جدید", "person-plus", Url.Action("Register", "Account"))
+			}
 
 		</ul>
 	</div>

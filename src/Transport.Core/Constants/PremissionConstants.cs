@@ -4,11 +4,15 @@ namespace Transport.Core.Constants
 {
 	public static class PremissionConstants
 	{
-		public static UserRoles[] TransportRequestRoles = new UserRoles[]
+		public static UserRoles[] TransportRequestRoles => new UserRoles[]
 		{
-			UserRoles.Manager,
-			UserRoles.MiddleManager,
 			UserRoles.Employee
+		};
+
+		public static UserRoles[] TransportRequestApproveRoles => new UserRoles[]
+		{
+			UserRoles.MiddleManager,
+			UserRoles.Manager
 		};
 	}
 }

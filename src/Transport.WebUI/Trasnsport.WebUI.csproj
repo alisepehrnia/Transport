@@ -239,6 +239,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Error\" />
+    <Folder Include="Views\Transport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\packages\bootstrap\css\bootstrap.rtl.min.css.map" />
