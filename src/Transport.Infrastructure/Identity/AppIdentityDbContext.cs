@@ -5,7 +5,7 @@ namespace Transport.Infrastructure.Identity
 {
 	public class AppIdentityDbContext : IdentityDbContext<ApplicationUser>
 	{
-		public AppIdentityDbContext() : base("name=TransportIdentityConnectionString", throwIfV1Schema: false)
+		public AppIdentityDbContext() : base("name=TransportConnectionString", throwIfV1Schema: false)
 		{
 		}
 
