@@ -44,7 +44,7 @@ nav {
 .navbar-nav .dropdown-menu {
     direction: rtl;
     position: absolute;
-    transform: translateX(0.5rem);
+    left: 0.5rem;
     border: $dropdown-menu-border;
     border-radius: $dropdown-menu-border-radius;
 }
