@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Transport.Core.Entities.User;
 
-namespace Transport.Core.Entities
+namespace Transport.Core.Entities.Transport
 {
 	public class TransportRequest : Request
 	{

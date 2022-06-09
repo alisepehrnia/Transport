@@ -1,12 +1,15 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Transport.Core.Entities;
+using Transport.Core.Entities.Transport;
+using Transport.Core.Entities.User;
 
 namespace Transport.Infrastructure.Data.DataAccess
 {
-	public class AppIdentityDbContext : IdentityDbContext<AppUser>
+	public class TransportDbContext : IdentityDbContext<AppUser>
 	{
-		public AppIdentityDbContext() : base("name=TransportConnectionString", throwIfV1Schema: false)
+		private const string ConnectionName = "name=TransportConnectionString";
+
+		public TransportDbContext() : base(ConnectionName, throwIfV1Schema: false)
 		{
 		}
 
@@ -15,9 +18,9 @@ namespace Transport.Infrastructure.Data.DataAccess
 			base.OnModelCreating(builder);
 		}
 
-		public static AppIdentityDbContext Create()
+		public static TransportDbContext Create()
 		{
-			return new AppIdentityDbContext();
+			return new TransportDbContext();
 		}
 
 		public DbSet<UserInfo> UserInfos { get; set; }

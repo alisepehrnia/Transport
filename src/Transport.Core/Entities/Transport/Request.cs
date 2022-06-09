@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Transport.Core.Entities.User;
 
-namespace Transport.Core.Entities
+namespace Transport.Core.Entities.Transport
 {
-	public class Request
+	public abstract class Request
 	{
 		[Key]
 		public int RequestId { get; set; }

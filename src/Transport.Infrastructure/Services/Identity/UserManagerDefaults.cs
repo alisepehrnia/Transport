@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.DataProtection;
-using Transport.Core.Entities;
+using Transport.Core.Entities.User;
 
 namespace Transport.Infrastructure.Services.Identity
 {

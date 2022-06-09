@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using Transport.Core.Entities;
+using Transport.Core.Entities.User;
 using Transport.Infrastructure.Data.DataAccess;
 
 namespace Transport.Infrastructure.Services.Identity
@@ -15,7 +15,7 @@ namespace Transport.Infrastructure.Services.Identity
 
 		public static AppRoleManager Create(IdentityFactoryOptions<AppRoleManager> options, IOwinContext context)
 		{
-			var manager = new AppRoleManager(new RoleStore<AppRole>(context.Get<AppIdentityDbContext>()));
+			var manager = new AppRoleManager(new RoleStore<AppRole>(context.Get<TransportDbContext>()));
 
 			return manager;
 		}

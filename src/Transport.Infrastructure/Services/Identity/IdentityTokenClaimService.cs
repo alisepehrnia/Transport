@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Transport.Core.Constants;
 using Transport.Core.Interfaces;
-using Transport.Core.Entities;
+using Transport.Core.Entities.User;
 
 namespace Transport.Infrastructure.Services.Identity
 {

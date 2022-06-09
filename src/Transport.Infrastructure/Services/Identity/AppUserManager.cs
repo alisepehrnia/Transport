@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Transport.Core.Constants;
-using Transport.Core.Entities;
+using Transport.Core.Entities.User;
 using Transport.Infrastructure.Data.DataAccess;
 
 namespace Transport.Infrastructure.Services.Identity
@@ -17,7 +17,7 @@ namespace Transport.Infrastructure.Services.Identity
 
 		public static AppUserManager Create(IdentityFactoryOptions<AppUserManager> options, IOwinContext context)
 		{
-			var manager = new AppUserManager(new UserStore<AppUser>(context.Get<AppIdentityDbContext>()));
+			var manager = new AppUserManager(new UserStore<AppUser>(context.Get<TransportDbContext>()));
 
 			// Configure validation logic for usernames
 			manager.UserValidator = UserManagerDefaults.GetDefaultUserValidator(manager);

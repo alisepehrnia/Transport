@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Transport.Core.Entities;
+using Transport.Core.Entities.User;
 using Transport.Core.Specifications;
 using Transport.Infrastructure.Data;
 

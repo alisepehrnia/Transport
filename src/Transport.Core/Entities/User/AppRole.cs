@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Transport.Core.Entities
+namespace Transport.Core.Entities.User
 {
 	public class AppRole : IdentityRole
 	{

@@ -4,7 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using Transport.Core.Entities;
+using Transport.Core.Entities.User;
 using Transport.Infrastructure.Data.DataAccess;
 using Transport.Infrastructure.Services.Identity;
 
@@ -16,7 +16,7 @@ namespace Trasnsport.WebUI
 		public void ConfigureAuth(IAppBuilder app)
 		{
 			// Configure the db context, user manager and signin manager to use a single instance per request
-			app.CreatePerOwinContext(AppIdentityDbContext.Create);
+			app.CreatePerOwinContext(TransportDbContext.Create);
 			app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
 			app.CreatePerOwinContext<AppSignInManager>(AppSignInManager.Create);
 			app.CreatePerOwinContext<AppRoleManager>(AppRoleManager.Create);

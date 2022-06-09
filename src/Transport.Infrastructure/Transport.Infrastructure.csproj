@@ -49,9 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\TransportRepository.cs" />
-    <Compile Include="Data\DataAccess\TransportContext.cs" />
-    <Compile Include="Data\DataAccess\TransportContextSeed.cs" />
-    <Compile Include="Data\DataAccess\AppIdentityDbContext.cs" />
+    <Compile Include="Data\DataAccess\TransportDbContext.cs" />
     <Compile Include="Services\Identity\IdentityTokenClaimService.cs" />
     <Compile Include="Logging\LoggerAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

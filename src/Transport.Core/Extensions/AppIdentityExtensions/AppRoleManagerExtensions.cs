@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
-using Transport.Core.Entities;
+using Transport.Core.Entities.User;
 
 namespace Transport.Core.Extensions.AppIdentityExtensions
 {

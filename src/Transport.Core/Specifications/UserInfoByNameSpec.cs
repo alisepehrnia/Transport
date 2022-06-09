@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Ardalis.Specification;
-using Transport.Core.Entities;
+using Transport.Core.Entities.User;
 
 namespace Transport.Core.Specifications
 {

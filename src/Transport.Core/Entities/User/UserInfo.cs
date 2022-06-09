@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Transport.Core.Entities
+namespace Transport.Core.Entities.User
 {
 	public class UserInfo
 	{
@@ -14,7 +14,6 @@ namespace Transport.Core.Entities
 		[Required]
 		public string Name { get; set; }
 
-		[Required]
 		public string NationalId { get; set; }
 
 		public string Address { get; set; }
