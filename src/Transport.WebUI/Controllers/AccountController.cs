@@ -7,7 +7,7 @@ using Transport.Infrastructure.Services.Identity;
 using Trasnsport.WebUI.App_Start;
 using Trasnsport.WebUI.ViewModels.Account;
 using Transport.Core.Extensions.AppIdentityExtensions;
-using Transport.Core.Entities;
+using Transport.Core.Entities.User;
 
 namespace Trasnsport.WebUI.Controllers
 {

@@ -10,9 +10,9 @@ namespace Transport.Infrastructure.Data
 {
 	public class TransportRepository<T> : RepositoryBase<T> where T : class
 	{
-		protected readonly TransportContext _dbContext;
+		protected readonly TransportDbContext _dbContext;
 
-		public TransportRepository(TransportContext dbContext) : base(dbContext)
+		public TransportRepository(TransportDbContext dbContext) : base(dbContext)
 		{
 			_dbContext = dbContext;
 		}

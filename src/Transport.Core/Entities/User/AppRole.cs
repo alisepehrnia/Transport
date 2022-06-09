@@ -15,6 +15,9 @@ namespace Transport.Core.Entities.User
 			return await manager.CreateAsync(this);
 		}
 
+		/// <summary>
+		/// Level Of User (Used For Hierarchical Request Approval)
+		/// </summary>
 		public int Level { get; set; }
 	}
 }
