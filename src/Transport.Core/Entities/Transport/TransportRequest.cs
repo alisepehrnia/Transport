@@ -86,5 +86,7 @@ namespace Transport.Core.Entities.Transport
 		/// Users Who Are Going To Travel With This Request (Except The Requester)
 		/// </summary>
 		public virtual ICollection<AppUser> OtherUsers { get; set; }
+
+		public virtual ConfirmChain<TransportRequest> ConfirmChain { get; set; }
 	}
 }

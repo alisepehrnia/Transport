@@ -48,6 +48,9 @@
     <Compile Include="Constants\AppInfoConstants.cs" />
     <Compile Include="Constants\AuthConstants.cs" />
     <Compile Include="Constants\PremissionConstants.cs" />
+    <Compile Include="Entities\Transport\ConfirmChain.cs" />
+    <Compile Include="Entities\Transport\Confirm.cs" />
+    <Compile Include="Enums\RequestState.cs" />
     <Compile Include="Extensions\AppIdentityExtensions\AppRoleManagerExtensions.cs" />
     <Compile Include="Extensions\AppIdentityExtensions\AppUserManagerExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="Entities\Transport\TransportRequest.cs" />
     <Compile Include="Entities\User\UserInfo.cs" />
     <Compile Include="Services\UserPremissionsCheckService.cs" />
+    <Compile Include="Specifications\RoleWithHigherLevelSpec.cs" />
     <Compile Include="Specifications\PrincipalByRolesSpec.cs" />
     <Compile Include="Specifications\UserInfoByNameSpec.cs" />
   </ItemGroup>

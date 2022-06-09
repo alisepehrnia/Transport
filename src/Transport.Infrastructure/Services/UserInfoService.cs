@@ -15,9 +15,9 @@ namespace Transport.Infrastructure.Services
 			_userInfoRepository = userInfoRepository;
 		}
 
-		public Task<List<UserInfo>> GetUserByName(string lastname)
+		public Task<List<UserInfo>> GetUserByName(string name)
 		{
-			return _userInfoRepository.ListAsync(new UserInfoByNameSpec(lastname));
+			return _userInfoRepository.ListAsync(new UserInfoByNameSpec(name));
 		}
 	}
 }

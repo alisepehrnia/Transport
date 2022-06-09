@@ -25,5 +25,8 @@ namespace Transport.Infrastructure.Data.DataAccess
 
 		public DbSet<UserInfo> UserInfos { get; set; }
 		public DbSet<TransportRequest> TransportRequests { get; set; }
+
+		public DbSet<AppUser> AppUsers => base.Set<AppUser>();
+		public DbSet<AppRole> AppRoles => base.Set<AppRole>();
 	}
 }
