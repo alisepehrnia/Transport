@@ -22,6 +22,13 @@ namespace Transport.Core.Entities.Transport
 			State = state;
 		}
 
+		public Confirm(AppUser user, TRequest request, RequestState state, int priority) : this(user, request, state)
+		{
+			Priority = priority;
+		}
+
+		public int ConfirmId { get; set; }
+
 		/// <summary>
 		/// User Who Is Responsible For Confirm
 		/// </summary>
@@ -40,9 +47,15 @@ namespace Transport.Core.Entities.Transport
 		[Required]
 		public RequestState State { get; set; } = RequestState.Initial;
 
+		/// <summary>
+		/// Relative Priority Of This Confirm In Confirms Chain of a Request
+		/// </summary>
+		[Required]
+		public int Priority { get; set; }
+
 		//Hepers
 		public bool IsInitial => State == RequestState.Initial;
 		public bool IsRejected => State == RequestState.Rejected;
-		public bool IsApproved => State == RequestState.Approved;
+		public bool IsConfirmed => State == RequestState.Confirmed;
 	}
 }

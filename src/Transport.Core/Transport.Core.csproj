@@ -50,6 +50,8 @@
     <Compile Include="Constants\PremissionConstants.cs" />
     <Compile Include="Entities\Transport\ConfirmChain.cs" />
     <Compile Include="Entities\Transport\Confirm.cs" />
+    <Compile Include="Entities\Transport\TransportRequestConfirm.cs" />
+    <Compile Include="Entities\Transport\TransportRequestConfirmChain.cs" />
     <Compile Include="Enums\RequestState.cs" />
     <Compile Include="Extensions\AppIdentityExtensions\AppRoleManagerExtensions.cs" />
     <Compile Include="Extensions\AppIdentityExtensions\AppUserManagerExtensions.cs" />

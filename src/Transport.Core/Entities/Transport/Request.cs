@@ -6,6 +6,10 @@ namespace Transport.Core.Entities.Transport
 {
 	public abstract class Request
 	{
+		protected Request()
+		{
+		}
+
 		/// <summary>
 		/// Makes New Request By Provided AppUser And DateTime.Now
 		/// </summary>
@@ -25,12 +29,14 @@ namespace Transport.Core.Entities.Transport
 		}
 
 		[Key]
+		[Display(Name = "شناسه درخواست")]
 		public int RequestId { get; set; }
 
 		/// <summary>
 		/// DateTime When This Request Has Been Made 
 		/// </summary>
 		[Required]
+		[Display(Name = "تاریخ ثبت")]
 		public DateTime DateTime { get; set; }
 
 		/// <summary>

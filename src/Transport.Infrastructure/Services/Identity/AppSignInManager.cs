@@ -17,7 +17,7 @@ namespace Transport.Infrastructure.Services.Identity
 
 		public override Task<ClaimsIdentity> CreateUserIdentityAsync(AppUser user)
 		{
-			return user.GenerateUserIdentityAsync((AppUserManager)UserManager);
+			return user.GenerateUserIdentityAsync(UserManager);
 		}
 
 		public static AppSignInManager Create(IdentityFactoryOptions<AppSignInManager> options, IOwinContext context)

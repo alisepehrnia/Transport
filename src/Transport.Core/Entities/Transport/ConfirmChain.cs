@@ -1,24 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Transport.Core.Enums;
 
 namespace Transport.Core.Entities.Transport
 {
 	/// <summary>
 	/// Represents A Chain Of Sorted Confirms (Designed For Down To Top Hierarchical Confirmation Proccess)
 	/// </summary>
-	/// <typeparam name="TRequest">Request Object Type (MUST Be Derived From Transport.Request)</typeparam>
-	public class ConfirmChain<TRequest> where TRequest : Request
+	/// <typeparam name="TConfirm">Confirm Object Type (MUST Be Derived From Confirm<TRequest>)</typeparam>
+	/// <typeparam name="TRequest">Request Object Type (MUST Be Derived From Request)</typeparam>
+	public class ConfirmChain<TConfirm, TRequest>
+		where TConfirm : Confirm<TRequest>
+		where TRequest : Request
 	{
 		public ConfirmChain()
 		{
-			Confirms = new SortedSet<Confirm<TRequest>>();
+			Confirms = new HashSet<TConfirm>();
 		}
 
-		public SortedSet<Confirm<TRequest>> Confirms { get; set; }
+		public int ConfirmChainId { get; set; }
+
+		public ICollection<TConfirm> Confirms { get; set; }
 
 		public bool IsRejected => Confirms.Any(c => c.IsRejected);
-		public bool IsConfirmed => Confirms.All(c => c.IsApproved);
+		public bool IsConfirmed => Confirms.All(c => c.IsConfirmed);
+		public bool IsInitial => !IsRejected && !IsConfirmed;
 
-		public Confirm<TRequest> ConfirmChainState => Confirms.FirstOrDefault(c => c.IsInitial);
+		public RequestState ConfirmState
+		{
+			get
+			{
+				if (IsRejected) return RequestState.Rejected;
+				else if (IsConfirmed) return RequestState.Confirmed;
+				else return RequestState.Initial;
+			}
+		}
+
+		public TConfirm ConfirmChainState => Confirms.FirstOrDefault(c => c.IsInitial);
 	}
 }

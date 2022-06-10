@@ -6,8 +6,17 @@ namespace Transport.Core.Entities.User
 {
 	public class AppRole : IdentityRole
 	{
-		public AppRole()
+		public AppRole() : base()
 		{
+		}
+
+		public AppRole(string name) : base(name)
+		{
+		}
+
+		public AppRole(string name, int level) : base(name)
+		{
+			Level = level;
 		}
 
 		public async Task<IdentityResult> GenerateUserRoleAsync(RoleManager<AppRole> manager)
@@ -18,6 +27,6 @@ namespace Transport.Core.Entities.User
 		/// <summary>
 		/// Level Of User (Used For Hierarchical Request Approval)
 		/// </summary>
-		public int Level { get; set; }
+		public virtual int Level { get; set; }
 	}
 }

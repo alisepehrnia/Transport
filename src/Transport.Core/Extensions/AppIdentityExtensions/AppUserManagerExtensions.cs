@@ -10,7 +10,7 @@ namespace Transport.Core.Extensions.AppIdentityExtensions
 		/// Creates New User And Adds It To UserManager
 		/// </summary>
 		/// <returns>Task Result</returns>
-		public static async Task<IdentityResult> AddUser(this UserManager<AppUser> @this, string username, string password)
+		public static async Task<IdentityResult> AddUser(this UserManager<AppUser, string> @this, string username, string password)
 		{
 			var user = new AppUser { UserName = username };
 			return await @this.CreateAsync(user, password);
@@ -20,7 +20,7 @@ namespace Transport.Core.Extensions.AppIdentityExtensions
 		/// Creates New User, Adds It To UserManager And Assign Role To It If Successfully Created
 		/// </summary>
 		/// <returns>Task Result (AddUser Result Or AddToRoleAsync Result)</returns>
-		public static async Task<IdentityResult> AddUser(this UserManager<AppUser> @this, string username, string password, string roleName)
+		public static async Task<IdentityResult> AddUser(this UserManager<AppUser, string> @this, string username, string password, string roleName)
 		{
 			var addResult = await @this.AddUser(username, password);
 			if (!addResult.Succeeded) return addResult;
@@ -33,7 +33,7 @@ namespace Transport.Core.Extensions.AppIdentityExtensions
 		/// Creates New User, Adds It To UserManager Then If Succeed Create Role In RoleManager Then If Succeed Assign It To Created User
 		/// </summary>
 		/// <returns>Task Result (AddUser Result Or RoleManager.CreateAsync Result Or AddToRoleAsync Result</returns>
-		public static async Task<IdentityResult> AddUser(this UserManager<AppUser> @this, string username, string password,
+		public static async Task<IdentityResult> AddUser(this UserManager<AppUser, string> @this, string username, string password,
 			RoleManager<AppRole> roleManager, string roleName, int roleLevel)
 		{
 			var addResult = await @this.AddUser(username, password);

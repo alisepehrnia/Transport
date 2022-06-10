@@ -4,6 +4,6 @@
 	{
 		Initial = -1,
 		Rejected,
-		Approved
+		Confirmed
 	}
 }

@@ -23,7 +23,7 @@ namespace Transport.Core.Entities.User
 		//Nav
 		public virtual ICollection<TransportRequest> TransportRequests { get; set; }
 
-		public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser> manager)
+		public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser, string> manager)
 		{
 			// Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
 			var userIdentity = await manager.CreateIdentityAsync(this, AuthConstants.DefaultAuthenticationType);

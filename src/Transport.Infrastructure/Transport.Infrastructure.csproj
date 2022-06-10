@@ -50,6 +50,11 @@
   <ItemGroup>
     <Compile Include="Data\TransportRepository.cs" />
     <Compile Include="Data\DataAccess\TransportDbContext.cs" />
+    <Compile Include="Migrations\202206101501377_TransportDbV1.cs" />
+    <Compile Include="Migrations\202206101501377_TransportDbV1.designer.cs">
+      <DependentUpon>202206101501377_TransportDbV1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\Identity\IdentityTokenClaimService.cs" />
     <Compile Include="Logging\LoggerAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Data\Queries\" />
     <Folder Include="Dependencies\" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +105,11 @@
       <Project>{06474218-6ebd-4adc-aa59-072e7be9a1da}</Project>
       <Name>Transport.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202206101501377_TransportDbV1.resx">
+      <DependentUpon>202206101501377_TransportDbV1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,6 +2,10 @@
 
 namespace Transport.Core.Entities.User
 {
+	/// <summary>
+	/// Contains Name, NationalId, Address, Role and Requests
+	/// For An App User
+	/// </summary>
 	public class UserInfo
 	{
 		public UserInfo()
@@ -9,7 +13,9 @@ namespace Transport.Core.Entities.User
 		}
 
 		[Key]
-		public int UserId { get; set; }
+		public int UserInfoId { get; set; }
+
+		public virtual AppUser User { get; set; }
 
 		[Required]
 		public string Name { get; set; }

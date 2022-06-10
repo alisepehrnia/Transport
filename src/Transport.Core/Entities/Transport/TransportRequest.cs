@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Transport.Core.Entities.User;
+using Transport.Core.Enums;
 
 namespace Transport.Core.Entities.Transport
 {
@@ -11,7 +12,9 @@ namespace Transport.Core.Entities.Transport
 	/// </summary>
 	public class TransportRequest : Request
 	{
-		private static readonly ICollection<AppUser> _EmptyUserCollection = new HashSet<AppUser>();
+		public TransportRequest()
+		{
+		}
 
 		/// <summary>
 		/// Makes New TransportRequest By Provided AppUser And DateTime.Now
@@ -34,7 +37,6 @@ namespace Transport.Core.Entities.Transport
 		/// </summary>
 		private void Init()
 		{
-			OtherUsers = _EmptyUserCollection;
 			TravelDateTime = DateTime.Now;
 		}
 
@@ -47,13 +49,30 @@ namespace Transport.Core.Entities.Transport
 		/// <param name="travelDateTime">DateTime To Travel</param>
 		/// <param name="address">Destination Address</param>
 		/// <param name="otherUsers">Users Who Are Going To Travel With This Request (Except The Requester)</param>
-		public TransportRequest(AppUser user, DateTime RequestDateTime, DateTime travelDateTime, string address,
-			ICollection<AppUser> otherUsers = null) : this(user, RequestDateTime)
+		//public TransportRequest(AppUser user, DateTime RequestDateTime, DateTime travelDateTime, string address,
+		//	ICollection<AppUser> otherUsers = null) : this(user, RequestDateTime)
+		//{
+		//	TravelDateTime = travelDateTime;
+		//	Address = address;
+		//	//Prevents To Set OtherUsers Null 
+		//	OtherUsers = otherUsers ?? _EmptyUserCollection;
+		//}
+
+		/// <summary>
+		/// Makes New TransportRequest By Provided AppUser, DateTime of Request, DateTime To Travel,
+		/// Destinaton Address and Optional Users Who Wants To Come
+		/// </summary>
+		/// <param name="user">Requester User</param>
+		/// <param name="RequestDateTime">DateTime of Request</param>
+		/// <param name="travelDateTime">DateTime To Travel</param>
+		/// <param name="address">Destination Address</param>
+		///// <param name="otherUser">User Who Are Going To Travel With This Request (In Addition To The Requester)</param>
+		public TransportRequest(AppUser user, DateTime RequestDateTime, DateTime travelDateTime, string address) : this(user, RequestDateTime)
 		{
 			TravelDateTime = travelDateTime;
 			Address = address;
 			//Prevents To Set OtherUsers Null 
-			OtherUsers = otherUsers ?? _EmptyUserCollection;
+			//if (otherUser != null) OtherUser = otherUser;
 		}
 
 		/// <summary>
@@ -64,9 +83,9 @@ namespace Transport.Core.Entities.Transport
 		/// <param name="user">Requester User</param>
 		/// <param name="travelDateTime">DateTime To Travel</param>
 		/// <param name="address">Destination Address</param>
-		/// <param name="otherUsers">Users Who Are Going To Travel With This Request (Except The Requester)</param>
-		public TransportRequest(AppUser user, DateTime travelDateTime, string address, ICollection<AppUser> otherUsers = null)
-			: this(user, DateTime.Now, travelDateTime, address, otherUsers = null)
+		///// <param name="otherUser">User Who Are Going To Travel With This Request (In Addition To The Requester)</param>
+		public TransportRequest(AppUser user, DateTime travelDateTime, string address)
+			: this(user, DateTime.Now, travelDateTime, address)
 		{
 		}
 
@@ -74,19 +93,29 @@ namespace Transport.Core.Entities.Transport
 		/// DateTime To Travel
 		/// </summary>
 		[Required]
+		[Display(Name = "زمان حرکت")]
 		public DateTime TravelDateTime { get; set; }
 
 		/// <summary>
 		/// Travel Destination Address
 		/// </summary>
 		[Required]
+		[Display(Name = "آدرس")]
 		public string Address { get; set; }
 
-		/// <summary>
-		/// Users Who Are Going To Travel With This Request (Except The Requester)
-		/// </summary>
-		public virtual ICollection<AppUser> OtherUsers { get; set; }
+		///// <summary>
+		///// Users Who Are Going To Travel With This Request (Except The Requester)
+		///// </summary>
+		//public virtual ICollection<AppUser> OtherUsers { get; set; } //Commented Because Of EF Model Building Errors
 
-		public virtual ConfirmChain<TransportRequest> ConfirmChain { get; set; }
+		//public virtual AppUser OtherUser { get; set; } //Commented Again ): Because Of EF Model Building Errors
+
+		//public virtual ICollection<TransportRequestConfirm> Confirms { get; set; }
+
+		public TransportRequestConfirmChain ConfirmChain { get; set; }
+
+		[NotMapped]
+		[Display(Name = "وضعیت درخواست")]
+		public RequestState ConfirmState => ConfirmChain.ConfirmState;
 	}
 }
