@@ -34,9 +34,9 @@ namespace Transport.Infrastructure.Data.DataAccess
 			//App User Has EXACT 1 User Info Associated With
 			//User Info Has EXACT 1 App User Associated With
 			//(1 To 1)
-			builder.Entity<AppUser>()
-				.HasRequired(t => t.UserInfo)
-				.WithRequiredPrincipal(t => t.User);
+			//builder.Entity<AppUser>()
+			//	.HasRequired(t => t.UserInfo)
+			//	.WithRequiredPrincipal(t => t.User);
 
 			//Users May Have 0..* Transport Request
 			//Each Transport Request Have EXACT 1 User Associated With
@@ -58,7 +58,8 @@ namespace Transport.Infrastructure.Data.DataAccess
 			//(1 To Many)
 			builder.Entity<TransportRequest>()
 				.HasRequired(t => t.User)
-				.WithMany(t => t.TransportRequests);
+				.WithMany(t => t.TransportRequests)
+				.WillCascadeOnDelete(false);
 
 			//Transport Request May Have 0..1 Confirm Chain
 			builder.Entity<TransportRequest>()

@@ -18,7 +18,7 @@ namespace Transport.Core.Entities.User
 		/// <summary>
 		/// Contains Name, NationalId, Address, Role and Requests
 		/// </summary>
-		public UserInfo UserInfo { get; set; }
+		//public UserInfo UserInfo { get; set; }
 
 		//Nav
 		public virtual ICollection<TransportRequest> TransportRequests { get; set; }

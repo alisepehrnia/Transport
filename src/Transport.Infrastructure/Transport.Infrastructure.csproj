@@ -50,9 +50,17 @@
   <ItemGroup>
     <Compile Include="Data\TransportRepository.cs" />
     <Compile Include="Data\DataAccess\TransportDbContext.cs" />
-    <Compile Include="Migrations\202206101501377_TransportDbV1.cs" />
+    <None Include="Migrations\202206101501377_TransportDbV1.cs" />
     <Compile Include="Migrations\202206101501377_TransportDbV1.designer.cs">
       <DependentUpon>202206101501377_TransportDbV1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206101542384_Transport_User_FK_bug.cs" />
+    <Compile Include="Migrations\202206101542384_Transport_User_FK_bug.designer.cs">
+      <DependentUpon>202206101542384_Transport_User_FK_bug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206101546312_RemoveUserInfo.cs" />
+    <Compile Include="Migrations\202206101546312_RemoveUserInfo.designer.cs">
+      <DependentUpon>202206101546312_RemoveUserInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\Identity\IdentityTokenClaimService.cs" />
@@ -109,6 +117,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202206101501377_TransportDbV1.resx">
       <DependentUpon>202206101501377_TransportDbV1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206101542384_Transport_User_FK_bug.resx">
+      <DependentUpon>202206101542384_Transport_User_FK_bug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206101546312_RemoveUserInfo.resx">
+      <DependentUpon>202206101546312_RemoveUserInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
