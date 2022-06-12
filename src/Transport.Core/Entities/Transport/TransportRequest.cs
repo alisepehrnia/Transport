@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Transport.Core.Entities.User;
@@ -87,6 +88,23 @@ namespace Transport.Core.Entities.Transport
 		public TransportRequest(AppUser user, DateTime travelDateTime, string address)
 			: this(user, DateTime.Now, travelDateTime, address)
 		{
+		}
+
+		/// <summary>
+		/// Makes New TransportRequest By Provided AppUser, DateTime To Travel,
+		/// Destinaton Address and Optional Users Who Wants To Come.
+		/// This Method Also Constructs New Confirm Chain & Populates It
+		/// By Confirms That Come From higherLevel_userLevelTuples.
+		/// Request DateTime = DateTime.Now
+		/// </summary>
+		/// <param name="user">Requester User</param>
+		/// <param name="travelDateTime">DateTime To Travel</param>
+		/// <param name="address">Destination Address</param>
+		/// <param name="higherLevel_userLevelTuples"></param>
+		public TransportRequest(AppUser user, DateTime travelDateTime, string address, IEnumerable<Tuple<AppUser, int>> higherLevel_userLevelTuples)
+			: this(user, DateTime.Now, travelDateTime, address)
+		{
+			ConfirmChain = new TransportRequestConfirmChain(this, higherLevel_userLevelTuples);
 		}
 
 		/// <summary>

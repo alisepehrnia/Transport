@@ -17,5 +17,10 @@ namespace Transport.Core.Entities.Transport
 			: base(user, request, state, priority)
 		{
 		}
+
+		public TransportRequestConfirm(AppUser user, TransportRequest request, int priority)
+			: base(user, request, RequestState.Initial, priority)
+		{
+		}
 	}
 }
