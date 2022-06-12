@@ -1,0 +1,19 @@
+﻿@model Transport.Core.Entities.Transport.TransportRequest
+
+@{
+	ViewBag.Title = "جزئیات درخواست";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<div>
+	<dl class="dl-horizontal">
+		@Html.Partial("_DetailPartial")
+	</dl>
+</div>
+
+<p>
+	@*@Html.ActionLink("Edit", "Edit", new { id = Model.RequestId }) |*@
+	@Html.ActionLink("بازگشت", "Index")
+</p>
