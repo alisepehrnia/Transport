@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\ExistCheckResultModel.cs" />
+    <Compile Include="Data\Repositories\TRequestRepo.cs" />
     <Compile Include="Data\Repositories\TransportRepository.cs" />
     <Compile Include="Data\DataAccess\TransportDbContext.cs" />
     <None Include="Migrations\202206101501377_TransportDbV1.cs" />
@@ -73,7 +75,6 @@
     <Compile Include="Services\Identity\AppRoleManager.cs" />
     <Compile Include="Services\Identity\AppUserManager.cs" />
     <Compile Include="Services\Identity\UserManagerDefaults.cs" />
-    <Compile Include="Services\TransportRequestService.cs" />
     <Compile Include="Services\UserInfoService.cs" />
   </ItemGroup>
   <ItemGroup>
