@@ -1,9 +1,8 @@
 ﻿namespace Transport.Infrastructure.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
-    public partial class Transport_User_FK_bug : DbMigration
+	using System.Data.Entity.Migrations;
+
+	public partial class Transport_User_FK_bug : DbMigration
     {
         public override void Up()
         {

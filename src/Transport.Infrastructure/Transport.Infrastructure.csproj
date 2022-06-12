@@ -48,9 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\TransportRepository.cs" />
+    <Compile Include="Data\Repositories\TransportRepository.cs" />
     <Compile Include="Data\DataAccess\TransportDbContext.cs" />
     <None Include="Migrations\202206101501377_TransportDbV1.cs" />
+    <Compile Include="Data\AppUserRoleLevelModel.cs" />
+    <Compile Include="Data\UserRoleLevelModel.cs" />
+    <Compile Include="Data\Queries\AppUserRoleLevelQueries.cs" />
     <Compile Include="Migrations\202206101501377_TransportDbV1.designer.cs">
       <DependentUpon>202206101501377_TransportDbV1.cs</DependentUpon>
     </Compile>

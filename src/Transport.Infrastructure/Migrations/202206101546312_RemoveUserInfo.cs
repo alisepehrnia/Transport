@@ -1,9 +1,8 @@
 ﻿namespace Transport.Infrastructure.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
-    public partial class RemoveUserInfo : DbMigration
+	using System.Data.Entity.Migrations;
+
+	public partial class RemoveUserInfo : DbMigration
     {
         public override void Up()
         {
