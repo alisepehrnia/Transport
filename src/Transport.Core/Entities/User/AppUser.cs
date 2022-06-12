@@ -5,11 +5,15 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using Transport.Core.Entities.Transport;
 using Transport.Core.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace Transport.Core.Entities.User
 {
 	public class AppUser : IdentityUser
 	{
+		[Display(Name = "نام کاربری")]
+		public override string UserName { get; set; }
+
 		public AppUser()
 		{
 			TransportRequests = new HashSet<TransportRequest>();

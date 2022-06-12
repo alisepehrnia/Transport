@@ -4,13 +4,16 @@ using Transport.Core.Specifications;
 
 namespace Transport.Core.Services
 {
+	/// <summary>
+	/// Helper Methods To Check Whether A User Have Special Premisons Or Not
+	/// </summary>
 	public static class UserPremissionsCheckService
 	{
 		private static PrincipalByRolesSpec TransportRequestRolesSpec => 
-			new PrincipalByRolesSpec(PremissionConstants.TransportRequestRoles);
+			new PrincipalByRolesSpec(PremissionConstants.TRequestRoles);
 
 		private static PrincipalByRolesSpec TransportRequestApproveRolesSpec =>
-			new PrincipalByRolesSpec(PremissionConstants.TransportRequestApproveRoles);
+			new PrincipalByRolesSpec(PremissionConstants.TRequestConfirmRoles);
 
 		/// <summary>
 		/// Check If A Principal Can Send Requests For Transport Or Not

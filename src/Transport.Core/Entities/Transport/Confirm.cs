@@ -11,6 +11,10 @@ namespace Transport.Core.Entities.Transport
 	/// <typeparam name="TRequest">Request Object Type (MUST Be Derived From Transport.Request)</typeparam>
 	public class Confirm<TRequest> where TRequest : Request
 	{
+		public Confirm()
+		{
+		}
+
 		public Confirm(AppUser user, TRequest request)
 		{
 			User = user;
