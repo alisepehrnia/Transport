@@ -73,6 +73,7 @@
     <Compile Include="Services\Identity\AppRoleManager.cs" />
     <Compile Include="Services\Identity\AppUserManager.cs" />
     <Compile Include="Services\Identity\UserManagerDefaults.cs" />
+    <Compile Include="Services\TransportRequestService.cs" />
     <Compile Include="Services\UserInfoService.cs" />
   </ItemGroup>
   <ItemGroup>
