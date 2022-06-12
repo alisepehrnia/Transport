@@ -4,8 +4,9 @@
 
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 col-4 sidebar bg-light">
 	<div class="position-sticky pt-3">
-		<ul class="nav flex-column gap-2">
+		<ul class="nav flex-column">
 
+			<!-- Generates Sidebar Link Button -->
 			@helper LinkGenerator(string text, string iconName, string href)
 			{
 				<li class="nav-item">
@@ -16,18 +17,23 @@
 				</li>
 			}
 
-			@LinkGenerator("صفحه اصلی", "house", "")
+			@LinkGenerator("صفحه اصلی", "house", Url.Action("Index", "Home"))
 
+			<!-- Show Links To See/Create Requests For Users With Request Premission: Employee -->
 			@if (UserPremissionsCheckService.CanTransportRequest(Context.User))
 			{
-				@LinkGenerator("درخواست جدید", "plus-circle", Url.Action("NewRequest", "Transport"))
+				@LinkGenerator("درخواست جدید", "plus-circle", Url.Action("Create", "TransportRequests"))
+				@LinkGenerator("درخواست‌ها", "archive", Url.Action("Index", "TransportRequests"))
 			}
 
-			@if (UserPremissionsCheckService.CanTransportRequest(Context.User) || UserPremissionsCheckService.CanApproveTransportRequest(Context.User))
+			<!-- Show Confirmable Requests To Users Who Are Responsible For Confirmation: Manager & MiddleManager -->
+			@if (UserPremissionsCheckService.CanApproveTransportRequest(Context.User))
 			{
-				@LinkGenerator("درخواست‌ها", "archive", Url.Action("Requests", "Transport"))
+				@LinkGenerator("بررسی درخواست‌ها", "hand-thumbs-up", Url.Action("Check", "TransportRequests"))
 			}
 
+			<!-- Show New Account Link To Admin Role -->
+			<!-- Using Different Aprroach To Show Different Ways Of Problem Solving :) -->
 			@if (Context.User.IsInRole(UserRoles.Admin))
 			{
 				@LinkGenerator("کاربر جدید", "person-plus", Url.Action("Register", "Account"))
