@@ -58,3 +58,11 @@ a {
 a, p, i, b h1, h2, h3, h4, h5, h6 {
     padding: 0.1rem;
 }
+
+h2 {
+    font-size: calc(1.3rem + .75vw);
+}
+
+hr {
+    background-color: var(--bs-gray-500);
+}

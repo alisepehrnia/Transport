@@ -1,5 +1,10 @@
-﻿$color-primary: rgb(30,70,150);
+﻿/* Primary */
+$color-primary: rgb(30,70,150);
 $color-primary-dark: rgb(20,50,100);
 $color-primary-dim: rgba(30,70,150,0.4);
 $color-primary-bright: rgb(60,90,160);
+
+/* Gray Shades */
 $light-gray: var(--bs-gray-300);
+/* Transparent Colors Syntax: color-{colorName}-t-{opacityPercent} */
+$color-black-t-5: rgba(0,0,0,0.05);
