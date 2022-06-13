@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Transport.Core.Extensions
 {
@@ -55,6 +56,20 @@ namespace Transport.Core.Extensions
 		{
 			TypeCheck<T>();
 			return Enum.GetNames(typeof(T));
+		}
+
+		/// <summary>
+		/// Get Names Of All Values In An Enum Values Specified
+		/// </summary>
+		/// <param name="values">Values To Get Names</param>
+		/// <typeparam name="T">Type of enum</typeparam>
+		/// <returns>Names Of Specified Enum Values As IEnumerable<string></returns>
+		public static IEnumerable<string> GetNames<T>(this T[] values) where T : struct, Enum
+		{
+			TypeCheck<T>();
+			var valuesNames = values.Select(v => v.GetName());
+			var allNames = GetNames<T>();
+			return valuesNames.Intersect(allNames);
 		}
 	}
 }

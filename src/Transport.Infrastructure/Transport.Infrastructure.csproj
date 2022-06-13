@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AppUserRoleLevelExtensions.cs" />
     <Compile Include="Data\ExistCheckResultModel.cs" />
     <Compile Include="Data\Repositories\TRequestRepo.cs" />
     <Compile Include="Data\Repositories\TransportRepository.cs" />

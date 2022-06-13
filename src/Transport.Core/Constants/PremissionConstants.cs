@@ -1,4 +1,6 @@
-﻿using Transport.Core.Enums;
+﻿using System.Collections.Generic;
+using Transport.Core.Enums;
+using Transport.Core.Extensions;
 
 namespace Transport.Core.Constants
 {
@@ -23,7 +25,7 @@ namespace Transport.Core.Constants
 
 		//Helpers - Commented Out Because They Are Not Working In It's Place
 		//public static IEnumerable<string> TRequestRoleNames = TRequestRoles.GetNames();
-		//public static IEnumerable<string> TRequestConfirmRoleNames = TRequestConfirmRoles.GetNames();
+		public static IEnumerable<string> TRequestConfirmRoleNames = TRequestConfirmRoles.GetNames();
 		//public static IEnumerable<string> TRequestAndConfirmRoleNames = TRequestRoleNames.Union(TRequestConfirmRoleNames);
 		//public static string TRequestAndConfirmRoleNamesString = string.Join(",", TRequestAndConfirmRoleNames.ToArray());
 	}

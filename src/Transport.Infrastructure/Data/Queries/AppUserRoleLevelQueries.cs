@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Transport.Core.Entities.User;
@@ -57,6 +56,7 @@ namespace Transport.Infrastructure.Data.Queries
 
 		/// <summary>
 		/// Get AppUserRoleLevelModel's With Levels Higher Than Specified Level
+		/// CAUTION: Level Increases From Managers To Drivers and etc (Managers Have Lower Levels)
 		/// </summary>
 		/// <param name="_db"></param>
 		/// <param name="level">Level Threshold</param>
@@ -67,13 +67,43 @@ namespace Transport.Infrastructure.Data.Queries
 		}
 
 		/// <summary>
-		/// Extension Method Wich Converts AppUserRoleLevelModel's To Tuples of (AppUser, level)
+		/// Get AppUserRoleLevelModel's With Levels Lower Than Specified Level
+		/// CAUTION: Level Increases From Managers To Drivers and etc (Managers Have Lower Levels)
 		/// </summary>
-		/// <param name="userRoleLevels">AppUserRoleLevelModel's</param>
-		/// <returns>IEnumerable<Tuple<AppUser, int>></returns>
-		public static IEnumerable<Tuple<AppUser, int>> ToUserLevelTuples(this IEnumerable<AppUserRoleLevelModel> userRoleLevels)
+		/// <param name="_db"></param>
+		/// <param name="level">Level Threshold</param>
+		/// <returns>IEnumerable<AppUserRoleLevelModel></returns>
+		public static IEnumerable<AppUserRoleLevelModel> GetLowerLevels(TransportDbContext _db, int level)
 		{
-			return userRoleLevels.Select(u => new Tuple<AppUser, int>(u.User, u.Level));
+			return GetAll(_db).Where(u => u.Level < level);
+		}
+
+		/// <summary>
+		/// Get AppUserRoleLevelModel's With Specified RoleName
+		/// </summary>
+		/// <param name="_db"></param>
+		/// <param name="roleName"></param>
+		/// <returns></returns>
+		public static IEnumerable<AppUserRoleLevelModel> GetByRoleName(TransportDbContext _db, string roleName)
+		{
+			return GetAll(_db).Where(u => u.Role.Name == roleName);
+		}
+
+		/// <summary>
+		/// Get AppUserRoleLevelModel's With One Of Specified RoleNames
+		/// </summary>
+		/// <param name="_db"></param>
+		/// <param name="roleNames"></param>
+		/// <returns></returns>
+		public static IEnumerable<AppUserRoleLevelModel> GetByRoleNames(TransportDbContext _db, params string[] roleNames)
+		{
+			var result = new List<AppUserRoleLevelModel>();
+			var allUsers = GetAll(_db);
+			foreach (var roleName in roleNames)
+			{
+				result.AddRange(allUsers.Where(u => u.Role.Name == roleName));
+			}
+			return result;
 		}
 	}
 }

@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Ardalis.Specification;
 using Ardalis.Specification.EntityFramework6;
+using Transport.Core.Constants;
 using Transport.Core.Entities.Transport;
 using Transport.Infrastructure.Data.DataAccess;
 using Transport.Infrastructure.Data.Queries;
@@ -19,6 +20,7 @@ namespace Transport.Infrastructure.Data
 	{
 		protected readonly TransportDbContext _db;
 		public DbSet<TransportRequest> Requests => _db.TransportRequests;
+		public IQueryable<TransportRequest> RequestsQ => _db.TransportRequests.Include(r => r.ConfirmChain.Confirms);
 
 		public TRequestRepo(TransportDbContext db) : base(db)
 		{
@@ -40,8 +42,7 @@ namespace Transport.Infrastructure.Data
 				return result;
 			}
 
-			var request = Requests.Include(r => r.ConfirmChain.Confirms)
-				.FirstOrDefault(r => r.RequestId == id);
+			var request = RequestsQ.FirstOrDefault(r => r.RequestId == id);
 			if (request == null)
 			{
 				result.HttpStatusCode = HttpStatusCode.NotFound;
@@ -73,18 +74,49 @@ namespace Transport.Infrastructure.Data
 		public TransportRequest Create(string userName, DateTime travelDateTime, string address)
 		{
 			var current = AppUserRoleLevelQueries.GetByUserName(_db, userName);
-			var higherLevel_userLevels = AppUserRoleLevelQueries.GetHigherLevels(_db, current.Level).ToUserLevelTuples();
-			return new TransportRequest(current.User, travelDateTime, address, higherLevel_userLevels);
+			var confirmators = AppUserRoleLevelQueries.GetByRoleNames(_db, PremissionConstants.TRequestConfirmRoleNames.ToArray());
+			var lowerLevels = AppUserRoleLevelQueries.GetLowerLevels(_db, current.Level);
+			var lowerLevelConfirmators = confirmators.Intersect(lowerLevels).ToUserLevelTuples();
+			return new TransportRequest(current.User, travelDateTime, address, lowerLevelConfirmators);
 		}
 
 		/// <summary>
-		/// Finds Transport Requests Whose User Have Specified UserName
+		/// Get Transport Requests With Travelers Whose Level Is Higher (Lower In Hierarchi) Than User With Specified UserName
+		/// </summary>
+		/// <param name="userName">Current User UserName</param>
+		/// <returns>IEnumerable<TransportRequest></returns>
+		public IEnumerable<TransportRequest> GetForConfirmation(string userName)
+		{
+			var current = AppUserRoleLevelQueries.GetByUserName(_db, userName);
+			var confirmators = AppUserRoleLevelQueries.GetByRoleNames(_db, PremissionConstants.TRequestConfirmRoleNames.ToArray());
+			var higherLevels = AppUserRoleLevelQueries.GetHigherLevels(_db, current.Level);
+			var higherLevelConfirmators = confirmators.Intersect(higherLevels);
+			return GetByUserNames(higherLevelConfirmators.ToUserNames().ToArray());
+		}
+
+		/// <summary>
+		/// Finds Transport Requests Whose User Has Specified UserName
 		/// </summary>
 		/// <param name="userName"></param>
 		/// <returns>IEnumerable<TransportRequest></returns>
 		public IEnumerable<TransportRequest> GetByUserName(string userName)
 		{
-			return Requests.Where(r => r.User.UserName == userName);
+			return RequestsQ.Where(r => r.User.UserName == userName);
+		}
+
+		/// <summary>
+		/// Finds Transport Requests Whose User Has One Of Specified UserName's
+		/// </summary>
+		/// <param name="userName"></param>
+		/// <returns>IEnumerable<TransportRequest></returns>
+		public IEnumerable<TransportRequest> GetByUserNames(params string[] userNames)
+		{
+			var requests = new List<TransportRequest>();
+			foreach (var userName in userNames)
+			{
+				requests.AddRange(GetByUserName(userName));
+			}
+			return requests;
 		}
 	}
 }
