@@ -134,6 +134,6 @@ namespace Transport.Core.Entities.Transport
 
 		[NotMapped]
 		[Display(Name = "وضعیت درخواست")]
-		public RequestState ConfirmState => ConfirmChain != null ? ConfirmChain.ConfirmState : RequestState.Confirmed;
+		public RequestState? ConfirmState => ConfirmChain?.ConfirmState;
 	}
 }

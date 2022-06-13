@@ -36,6 +36,9 @@ namespace Transport.Core.Entities.Transport
 			}
 		}
 
+		/// <summary>
+		/// First Confirm In The Chain Which Is Not Confirmed Nor Rejected
+		/// </summary>
 		public TConfirm ConfirmChainState => Confirms.FirstOrDefault(c => c.IsInitial);
 	}
 }
