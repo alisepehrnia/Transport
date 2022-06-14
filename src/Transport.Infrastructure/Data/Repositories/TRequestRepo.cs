@@ -53,9 +53,9 @@ namespace Transport.Infrastructure.Data
 			return result;
 		}
 
-		public async Task<TransportRequest> GetByIdAsync(params object[] pk)
+		public async Task<TransportRequest> GetByIdAsync(int id)
 		{
-			return await Requests.FindAsync(pk);
+			return RequestsQ.SingleOrDefault(r => r.RequestId == id);
 		}
 
 		public IEnumerable<TransportRequest> FindWithSpecificationPattern(ISpecification<TransportRequest> specification = null)
@@ -80,6 +80,7 @@ namespace Transport.Infrastructure.Data
 			return new TransportRequest(current.User, travelDateTime, address, lowerLevelConfirmators);
 		}
 
+		/* Replaced With GetByConfirmCurrentStateUserName() */
 		/// <summary>
 		/// Get Transport Requests With Travelers Whose Level Is Higher (Lower In Hierarchi) Than User With Specified UserName
 		/// </summary>
@@ -89,7 +90,7 @@ namespace Transport.Infrastructure.Data
 		{
 			var current = AppUserRoleLevelQueries.GetByUserName(_db, userName);
 			var confirmators = AppUserRoleLevelQueries.GetByRoleNames(_db, PremissionConstants.TRequestConfirmRoleNames.ToArray());
-			var higherLevels = AppUserRoleLevelQueries.GetHigherLevels(_db, current.Level);
+			var higherLevels = AppUserRoleLevelQueries.GetLowerLevels(_db, current.Level);
 			var higherLevelConfirmators = confirmators.Intersect(higherLevels);
 			return GetByUserNames(higherLevelConfirmators.ToUserNames().ToArray());
 		}
@@ -102,6 +103,17 @@ namespace Transport.Infrastructure.Data
 		public IEnumerable<TransportRequest> GetByUserName(string userName)
 		{
 			return RequestsQ.Where(r => r.User.UserName == userName);
+		}
+
+		/// <summary>
+		/// Finds Transport Requests Whose Current User Responsible For Confirm Has Specified UserName
+		/// </summary>
+		/// <param name="userName"></param>
+		/// <returns>IEnumerable<TransportRequest></returns>
+		public IEnumerable<TransportRequest> GetByConfirmCurrentStateUserName(string userName)
+		{
+			return RequestsQ.Where(r => r.ConfirmChain.Confirms.FirstOrDefault
+			(c => c.State == Core.Enums.RequestState.Initial).User.UserName == userName);
 		}
 
 		/// <summary>
