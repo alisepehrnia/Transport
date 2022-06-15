@@ -10,7 +10,7 @@
 			@helper LinkGenerator(string text, string iconName, string href)
 			{
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="@href">
+					<a class="nav-link" aria-current="page" href="@href">
 						<i class="bi bi-@iconName-fill fs-5"></i>
 						@text
 					</a>
@@ -19,22 +19,21 @@
 
 			@LinkGenerator("صفحه اصلی", "house", Url.Action("Index", "Home"))
 
-			<!-- Show Links To See/Create Requests For Users With Request Premission: Employee -->
-			@if (UserPremissionsCheckService.CanTransportRequest(Context.User))
+			<!-- Show Links To See/Create Requests For Users With Request Premission: Manager, MiddleManager & Employee -->
+			@if (Context.User.HavePremission(AppTasks.CreateTransportRequest))
 			{
 				@LinkGenerator("درخواست جدید", "plus-circle", Url.Action("Create", "TransportRequests"))
 				@LinkGenerator("درخواست‌ها", "archive", Url.Action("Index", "TransportRequests"))
 			}
 
 			<!-- Show Confirmable Requests To Users Who Are Responsible For Confirmation: Manager & MiddleManager -->
-			@if (UserPremissionsCheckService.CanApproveTransportRequest(Context.User))
+			@if (Context.User.HavePremission(AppTasks.ConfirmTransportRequest))
 			{
-				@LinkGenerator("بررسی درخواست‌ها", "hand-thumbs-up", Url.Action("Check", "TransportRequests"))
+				@LinkGenerator("بررسی درخواست‌ها", "hand-thumbs-up", Url.Action("Confirmation", "TransportRequests"))
 			}
 
 			<!-- Show New Account Link To Admin Role -->
-			<!-- Using Different Aprroach To Show Different Ways Of Problem Solving :) -->
-			@if (Context.User.IsInRole(UserRoles.Admin))
+			@if (Context.User.HavePremission(AppTasks.CreateUser))
 			{
 				@LinkGenerator("کاربر جدید", "person-plus", Url.Action("Register", "Account"))
 			}

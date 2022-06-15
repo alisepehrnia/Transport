@@ -6,41 +6,40 @@ namespace Transport.Core.Constants
 {
 	/// <summary>
 	/// Constants Showing Roles And Their Premissions Such as Create Request & Confirm Request
-	/// CAUTION: Not Working Directly In Controller Annotations Yet! (Just To Keep In Mind The Roles And Premissions)
+	/// CAUTION: Not Working Directly In Controller Annotations Yet!
 	/// </summary>
 	public static class PremissionConstants
 	{
 		/// <summary>
-		/// Roles Who Can Create New Users: Admin
+		/// Map App Tasks To List Of UserRoles
 		/// </summary>
-		public static UserRoles[] TUserCreate => new UserRoles[]
+		internal static readonly Dictionary<AppTasks, List<UserRoles>> TaskRoles = new Dictionary<AppTasks, List<UserRoles>>
 		{
-			UserRoles.Admin
+			//Roles Who Can Create New Users: Admin
+			{
+				AppTasks.CreateUser,
+				new List<UserRoles>() { UserRoles.Admin }
+			},
+			//Roles Who Can Create New Transport Requests: Manager, MiddleManager, Employee
+			{
+				AppTasks.CreateTransportRequest,
+				new List<UserRoles>() { UserRoles.Manager, UserRoles.MiddleManager, UserRoles.Employee }
+			},
+			//Roles Who Can Confirm Transport Requests: Manager, MiddleManager
+			{
+				AppTasks.ConfirmTransportRequest,
+				new List<UserRoles>() { UserRoles.Manager, UserRoles.MiddleManager }
+			},
 		};
 
 		/// <summary>
-		/// Roles Who Can Create New Transport Requests: Manager, MiddleManager, Employee
+		/// Get Name Of Roles Who Have Premissions To Do Specified AppTask
 		/// </summary>
-		public static UserRoles[] TRequestRoles => new UserRoles[]
+		/// <param name="appTask"></param>
+		/// <returns></returns>
+		public static IEnumerable<string> GetPremissionRoleNames(AppTasks appTask)
 		{
-			UserRoles.Manager,
-			UserRoles.MiddleManager,
-			UserRoles.Employee
-		};
-
-		/// <summary>
-		/// Roles Who Can Confirm Transport Requests: Manager, MiddleManager
-		/// </summary>
-		public static UserRoles[] TRequestConfirmRoles => new UserRoles[]
-		{
-			UserRoles.MiddleManager,
-			UserRoles.Manager
-		};
-
-		//Helpers - Commented Out Because They Are Not Working In It's Place
-		//public static IEnumerable<string> TRequestRoleNames = TRequestRoles.GetNames();
-		public static IEnumerable<string> TRequestConfirmRoleNames => TRequestConfirmRoles.GetNames();
-		//public static IEnumerable<string> TRequestAndConfirmRoleNames = TRequestRoleNames.Union(TRequestConfirmRoleNames);
-		//public static string TRequestAndConfirmRoleNamesString = string.Join(",", TRequestAndConfirmRoleNames.ToArray());
+			return TaskRoles[appTask].GetNames();
+		}
 	}
 }

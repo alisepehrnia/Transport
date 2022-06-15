@@ -71,5 +71,16 @@ namespace Transport.Core.Extensions
 			var allNames = GetNames<T>();
 			return valuesNames.Intersect(allNames);
 		}
+
+		/// <summary>
+		/// Get Names Of All Values In An Enum Values Specified
+		/// </summary>
+		/// <param name="values">Values To Get Names</param>
+		/// <typeparam name="T">Type of enum</typeparam>
+		/// <returns>Names Of Specified Enum Values As IEnumerable<string></returns>
+		public static IEnumerable<string> GetNames<T>(this ICollection<T> values) where T : struct, Enum
+		{
+			return values.ToArray().GetNames();
+		}
 	}
 }

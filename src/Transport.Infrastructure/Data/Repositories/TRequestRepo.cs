@@ -8,6 +8,7 @@ using Ardalis.Specification;
 using Ardalis.Specification.EntityFramework6;
 using Transport.Core.Constants;
 using Transport.Core.Entities.Transport;
+using Transport.Core.Enums;
 using Transport.Infrastructure.Data.DataAccess;
 using Transport.Infrastructure.Data.Queries;
 
@@ -74,7 +75,8 @@ namespace Transport.Infrastructure.Data
 		public TransportRequest Create(string userName, DateTime travelDateTime, string address)
 		{
 			var current = AppUserRoleLevelQueries.GetByUserName(_db, userName);
-			var confirmators = AppUserRoleLevelQueries.GetByRoleNames(_db, PremissionConstants.TRequestConfirmRoleNames.ToArray());
+			var confirmators = AppUserRoleLevelQueries.GetByRoleNames(_db,
+				PremissionConstants.GetPremissionRoleNames(AppTasks.ConfirmTransportRequest).ToArray());
 			var lowerLevels = AppUserRoleLevelQueries.GetLowerLevels(_db, current.Level);
 			var lowerLevelConfirmators = confirmators.Intersect(lowerLevels).ToUserLevelTuples();
 			return new TransportRequest(current.User, travelDateTime, address, lowerLevelConfirmators);
@@ -89,7 +91,8 @@ namespace Transport.Infrastructure.Data
 		public IEnumerable<TransportRequest> GetForConfirmation(string userName)
 		{
 			var current = AppUserRoleLevelQueries.GetByUserName(_db, userName);
-			var confirmators = AppUserRoleLevelQueries.GetByRoleNames(_db, PremissionConstants.TRequestConfirmRoleNames.ToArray());
+			var confirmators = AppUserRoleLevelQueries.GetByRoleNames(_db,
+				PremissionConstants.GetPremissionRoleNames(AppTasks.ConfirmTransportRequest).ToArray());
 			var higherLevels = AppUserRoleLevelQueries.GetLowerLevels(_db, current.Level);
 			var higherLevelConfirmators = confirmators.Intersect(higherLevels);
 			return GetByUserNames(higherLevelConfirmators.ToUserNames().ToArray());
