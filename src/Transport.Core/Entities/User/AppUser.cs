@@ -9,6 +9,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Transport.Core.Entities.User
 {
+	/// <summary>
+	/// Customized & Extended Version Of Identity User Which Contains Navigation Property To User Transport Requests
+	/// </summary>
 	public class AppUser : IdentityUser
 	{
 		[Display(Name = "نام کاربری")]

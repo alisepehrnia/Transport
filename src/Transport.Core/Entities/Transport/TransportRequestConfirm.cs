@@ -4,7 +4,7 @@ using Transport.Core.Enums;
 namespace Transport.Core.Entities.Transport
 {
 	/// <summary>
-	/// Special Confirm Object Which Represents A Transport Request To Be Confirmed,
+	/// Extended Version Of Confirm  Which Represents A Transport Request To Be Confirmed,
 	/// AppUser Responsible For Confirmation and The State Of Confirm
 	/// </summary>
 	public class TransportRequestConfirm : Confirm<TransportRequest>

@@ -4,6 +4,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Transport.Core.Entities.User
 {
+	/// <summary>
+	/// Based On Identity Role With New Properties: Role Level
+	/// </summary>
 	public class AppRole : IdentityRole
 	{
 		public AppRole() : base()
@@ -25,7 +28,7 @@ namespace Transport.Core.Entities.User
 		}
 
 		/// <summary>
-		/// Level Of User (Used For Hierarchical Request Approval)
+		/// Level Of Role (Used For Hierarchical Request Approval)
 		/// </summary>
 		public virtual int Level { get; set; }
 	}

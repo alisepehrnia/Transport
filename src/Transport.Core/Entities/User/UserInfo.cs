@@ -3,8 +3,8 @@
 namespace Transport.Core.Entities.User
 {
 	/// <summary>
-	/// Contains Name, NationalId, Address, Role and Requests
-	/// For An App User
+	/// Contains Name, NationalId, Address, Role and Requests For An App User
+	/// CAUTION: Not Utilized (Commented Out In Calling Class: AppUser)
 	/// </summary>
 	public class UserInfo
 	{

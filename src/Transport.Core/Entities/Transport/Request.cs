@@ -4,6 +4,9 @@ using Transport.Core.Entities.User;
 
 namespace Transport.Core.Entities.Transport
 {
+	/// <summary>
+	/// General Request Object With Id, AppUser and DateTime
+	/// </summary>
 	public abstract class Request
 	{
 		protected Request()
@@ -43,6 +46,7 @@ namespace Transport.Core.Entities.Transport
 		/// User Who Made This Request
 		/// </summary>
 		[Required]
+		[Display(Name = "کاربر")]
 		public virtual AppUser User { get; set; }
 	}
 }

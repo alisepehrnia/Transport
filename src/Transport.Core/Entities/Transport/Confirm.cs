@@ -6,7 +6,7 @@ namespace Transport.Core.Entities.Transport
 {
 	/// <summary>
 	/// Confirm Object Represents A Request To Be Confirmed,
-	/// AppUser Responsible For Confirmation and The State Of Confirm
+	/// The AppUser Responsible For Confirmation and The State Of Confirm
 	/// </summary>
 	/// <typeparam name="TRequest">Request Object Type (MUST Be Derived From Transport.Request)</typeparam>
 	public class Confirm<TRequest> where TRequest : Request
@@ -57,7 +57,7 @@ namespace Transport.Core.Entities.Transport
 		[Required]
 		public int Priority { get; set; }
 
-		//Hepers
+		//Helpers
 		public bool IsInitial => State == RequestState.Initial;
 		public bool IsRejected => State == RequestState.Rejected;
 		public bool IsConfirmed => State == RequestState.Confirmed;

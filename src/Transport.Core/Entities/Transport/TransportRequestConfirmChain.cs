@@ -4,6 +4,9 @@ using Transport.Core.Entities.User;
 
 namespace Transport.Core.Entities.Transport
 {
+	/// <summary>
+	/// Custom Version Of Confirm Chain Customed For TransportRequest And TransportRequestConfirm
+	/// </summary>
 	public class TransportRequestConfirmChain : ConfirmChain<TransportRequestConfirm, TransportRequest>
 	{
 		public TransportRequestConfirmChain()

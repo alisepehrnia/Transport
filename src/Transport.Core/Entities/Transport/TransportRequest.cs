@@ -8,11 +8,38 @@ using Transport.Core.Enums;
 namespace Transport.Core.Entities.Transport
 {
 	/// <summary>
-	/// Extended Version Of Request.
+	/// Extended Version Of Request Wich
 	/// Include: TravelDateTime, Address & OtherUsers
 	/// </summary>
 	public class TransportRequest : Request
 	{
+		/// <summary>
+		/// DateTime To Travel
+		/// </summary>
+		[Required]
+		[Display(Name = "زمان حرکت")]
+		public DateTime TravelDateTime { get; set; }
+
+		/// <summary>
+		/// Travel Destination Address
+		/// </summary>
+		[Required]
+		[Display(Name = "آدرس")]
+		public string Address { get; set; }
+
+		///// <summary>
+		///// Users Who Are Going To Travel With This Request (Except The Requester)
+		///// </summary>
+		//public virtual ICollection<AppUser> OtherUsers { get; set; } //Commented Because Of EF Model Building Errors
+
+		//public virtual AppUser OtherUser { get; set; } //Commented Again ): Because Of EF Model Building Errors
+
+		public TransportRequestConfirmChain ConfirmChain { get; set; }
+
+		[NotMapped]
+		[Display(Name = "وضعیت درخواست")]
+		public RequestState? ConfirmState => ConfirmChain?.ConfirmState;
+
 		public TransportRequest()
 		{
 		}
@@ -106,34 +133,5 @@ namespace Transport.Core.Entities.Transport
 		{
 			ConfirmChain = new TransportRequestConfirmChain(this, higherLevel_userLevelTuples);
 		}
-
-		/// <summary>
-		/// DateTime To Travel
-		/// </summary>
-		[Required]
-		[Display(Name = "زمان حرکت")]
-		public DateTime TravelDateTime { get; set; }
-
-		/// <summary>
-		/// Travel Destination Address
-		/// </summary>
-		[Required]
-		[Display(Name = "آدرس")]
-		public string Address { get; set; }
-
-		///// <summary>
-		///// Users Who Are Going To Travel With This Request (Except The Requester)
-		///// </summary>
-		//public virtual ICollection<AppUser> OtherUsers { get; set; } //Commented Because Of EF Model Building Errors
-
-		//public virtual AppUser OtherUser { get; set; } //Commented Again ): Because Of EF Model Building Errors
-
-		//public virtual ICollection<TransportRequestConfirm> Confirms { get; set; }
-
-		public TransportRequestConfirmChain ConfirmChain { get; set; }
-
-		[NotMapped]
-		[Display(Name = "وضعیت درخواست")]
-		public RequestState? ConfirmState => ConfirmChain?.ConfirmState;
 	}
 }
