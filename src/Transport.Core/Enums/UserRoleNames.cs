@@ -1,11 +1,32 @@
 ﻿namespace Transport.Core.Enums
 {
+	/// <summary>
+	/// Roles Of Users.
+	/// Hint: Values Representing Level Of User (Lower Numbers Are More Powerful And Have More Premissions)
+	/// Hint: Have 10x Values To Have Spaces In Between For Further Role Levels
+	/// </summary>
 	public enum UserRoles
 	{
-		Manager = 1, //Can Issue Or Cancel Transport Requests And Approve MiddleManager And Employee Transport Requests
-		Admin = 2, //Can Cancel Transport Requests
-		MiddleManager = 3, //Can Issue Or Cancel Transport Requests And Approve Employee Transport Requests
-		Employee = 4, //Can Issue Or Cancel Transport Requests
-		Driver = 5 //Only Can Access Transport Receipts 
+		/// <summary>
+		/// Can Create New User.
+		/// Hint: Is Negative Number To Easily Exclude From Approval Logics
+		/// </summary>
+		Admin = -10,
+		/// <summary>
+		/// Can Create Transport Requests And Confirm/Reject MiddleManager And Employee Transport Requests
+		/// </summary>
+		Manager = 10,
+		/// <summary>
+		/// Can Create Transport Requests And Confirm/Reject Employee Transport Requests
+		/// </summary>		
+		MiddleManager = 20,
+		/// <summary>
+		/// Can Create Transport Requests
+		/// </summary>
+		Employee = 30,
+		/// <summary>
+		/// Can See Transport Requests
+		/// </summary>
+		Driver = 40
 	}
 }
