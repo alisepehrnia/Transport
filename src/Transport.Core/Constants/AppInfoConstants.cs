@@ -1,7 +1,13 @@
 ﻿namespace Transport.Core.Constants
 {
+	/// <summary>
+	/// Meta Data About Application Itself
+	/// </summary>
 	public static class AppInfoConstants
 	{
-		public const string AppTitle = "پورتال حمل‌ونقل";
+		/// <summary>
+		/// Application Title
+		/// </summary>
+		public const string AppTitle = "کارتابل حمل‌ونقل";
 	}
 }
