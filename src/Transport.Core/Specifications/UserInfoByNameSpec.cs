@@ -4,6 +4,9 @@ using Transport.Core.Entities.User;
 
 namespace Transport.Core.Specifications
 {
+	/// <summary>
+	/// Find UserInfo With Specified UserName
+	/// </summary>
 	public class UserInfoByNameSpec : Specification<UserInfo>
 	{
 		public UserInfoByNameSpec(string name)

@@ -6,6 +6,7 @@ namespace Transport.Core.Services
 {
 	/// <summary>
 	/// Helper Methods To Check Whether A User Have Special Premisons Or Not
+	/// ALERT: Needs Better Architecture :\ 
 	/// </summary>
 	public static class UserPremissionsCheckService
 	{
@@ -18,7 +19,7 @@ namespace Transport.Core.Services
 		/// <summary>
 		/// Check If A Principal Can Send Requests For Transport Or Not
 		/// Temporarily Specified By PremissionConstants.TransportRequestRoles
-		/// And Through Using PrincipalByRolesSpec (Needs Better Architecture :)
+		/// And Through Using PrincipalByRolesSpec
 		/// </summary>
 		public static bool CanTransportRequest(IPrincipal principal)
 		{
@@ -28,7 +29,7 @@ namespace Transport.Core.Services
 		/// <summary>
 		/// Check If A Principal Can Approve Transport Requests Or Not
 		/// Temporarily Specified By PremissionConstants.TransportRequestApproveRoles
-		/// And Through Using PrincipalByRolesSpec (Needs Better Architecture :)
+		/// And Through Using PrincipalByRolesSpec
 		/// </summary>
 		public static bool CanApproveTransportRequest(IPrincipal principal)
 		{

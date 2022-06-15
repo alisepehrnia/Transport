@@ -6,6 +6,9 @@ using Transport.Core.Extensions;
 
 namespace Transport.Core.Specifications
 {
+	/// <summary>
+	/// Check User Priniciapl With Roles
+	/// </summary>
 	public class PrincipalByRolesSpec : Specification<IPrincipal>
 	{
 		public PrincipalByRolesSpec(params UserRoles[] userRoles)
