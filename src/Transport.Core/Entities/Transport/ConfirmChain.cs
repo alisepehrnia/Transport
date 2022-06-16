@@ -54,8 +54,9 @@ namespace Transport.Core.Entities.Transport
 		}
 
 		/// <summary>
-		/// First Confirm In The Chain Which Is Not Confirmed Nor Rejected (First Or Default Confirm Wich Is Initial)
+		/// First Confirm In The Chain Which Is Not Confirmed Nor Rejected (First Or Default Confirm With Highest Priority Wich Is Initial)
 		/// </summary>
-		public TConfirm ConfirmChainState => Confirms.FirstOrDefault(c => c.IsInitial);
+		public TConfirm ConfirmChainState => Confirms.OrderByDescending(c => c.Priority)
+			.FirstOrDefault(c => c.IsInitial);
 	}
 }

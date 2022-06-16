@@ -77,10 +77,7 @@ namespace Transport.Infrastructure.Data
 		public TransportRequest Create(string userName, DateTime travelDateTime, string address)
 		{
 			var current = AppUserRoleLevelQueries.GetByUserName(_db, userName);
-			var confirmators = AppUserRoleLevelQueries.GetByRoleNames(_db,
-				PremissionConstants.GetPremissionRoleNames(AppTasks.ConfirmTransportRequest).ToArray());
-			var lowerLevels = AppUserRoleLevelQueries.GetLowerLevels(_db, current.Level);
-			var lowerLevelConfirmators = confirmators.Intersect(lowerLevels).ToUserLevelTuples();
+			var lowerLevelConfirmators = HigherLowerLevelConfirmators(current, false).ToUserLevelTuples();
 			return new TransportRequest(current.User, travelDateTime, address, lowerLevelConfirmators);
 		}
 
@@ -93,11 +90,23 @@ namespace Transport.Infrastructure.Data
 		public IEnumerable<TransportRequest> GetForConfirmation(string userName)
 		{
 			var current = AppUserRoleLevelQueries.GetByUserName(_db, userName);
+			var higherLevelConfirmators = HigherLowerLevelConfirmators(current, true);
+			return GetByUserNames(higherLevelConfirmators.ToUserNames().ToArray());
+		}
+
+		/// <summary>
+		/// Joins Confirmator Roles With Higher/Lower Level Users Over UserId
+		/// </summary>
+		/// <param name="current">Current AppUserRoleLevel</param>
+		/// <param name="getHighers"><see langword="true"/> To Get Higher Lower Level Roles and <see langword="false"/> To Get Lower Level Roles</param>
+		/// <returns></returns>
+		public IEnumerable<AppUserRoleLevelModel> HigherLowerLevelConfirmators(AppUserRoleLevelModel current, bool getHighers)
+		{
 			var confirmators = AppUserRoleLevelQueries.GetByRoleNames(_db,
 				PremissionConstants.GetPremissionRoleNames(AppTasks.ConfirmTransportRequest).ToArray());
-			var higherLevels = AppUserRoleLevelQueries.GetLowerLevels(_db, current.Level);
-			var higherLevelConfirmators = confirmators.Intersect(higherLevels);
-			return GetByUserNames(higherLevelConfirmators.ToUserNames().ToArray());
+			var usersByLevel = !getHighers ? AppUserRoleLevelQueries.GetLowerLevels(_db, current.Level)
+				: AppUserRoleLevelQueries.GetHigherLevels(_db, current.Level);
+			return confirmators.Where(c => usersByLevel.Any(l => l.User.Id == c.User.Id));
 		}
 
 		/// <summary>
@@ -117,8 +126,7 @@ namespace Transport.Infrastructure.Data
 		/// <returns>IEnumerable<TransportRequest></returns>
 		public IEnumerable<TransportRequest> GetByConfirmCurrentStateUserName(string userName)
 		{
-			return RequestsQ.Where(r => r.ConfirmChain.Confirms.FirstOrDefault
-			(c => c.State == Core.Enums.RequestState.Initial).User.UserName == userName);
+			return RequestsQ.AsEnumerable().Where(r => r.ConfirmChain.ConfirmChainState?.User?.UserName == userName);
 		}
 
 		/// <summary>

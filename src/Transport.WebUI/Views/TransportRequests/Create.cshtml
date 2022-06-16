@@ -41,7 +41,7 @@
 			</div>
 		</div>
 
-		@if (((IEnumerable<SelectListItem>)ViewBag.OtherUsersListItems).Any())
+		@if (ViewBag.OtherUsersListItems != null && ((IEnumerable<SelectListItem>)ViewBag.OtherUsersListItems).Any())
 		{
 			<div class="form-group">
 				@Html.LabelFor(model => model.OtherUsers, htmlAttributes: new { @class = labelClasses })

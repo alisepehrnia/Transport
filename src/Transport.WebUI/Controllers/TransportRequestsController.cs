@@ -62,7 +62,7 @@ namespace Trasnsport.WebUI.Controllers
 		{
 			var request = await Repo.GetByIdAsync(confirmId);
 			if (UserName != request.ConfirmChain.ConfirmChainState.User.UserName) return -1;
-			var confirm = request.ConfirmChain.Confirms.SingleOrDefault(c => c.State == RequestState.Initial);
+			var confirm = request.ConfirmChain.ConfirmChainState;
 			confirm.State = state;
 			db.Entry(confirm).State = EntityState.Modified;
 			return await db.SaveChangesAsync();
