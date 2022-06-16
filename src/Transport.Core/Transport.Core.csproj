@@ -56,6 +56,7 @@
     <Compile Include="Enums\RequestState.cs" />
     <Compile Include="Extensions\AppIdentityExtensions\AppRoleManagerExtensions.cs" />
     <Compile Include="Extensions\AppIdentityExtensions\AppUserManagerExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Entities\User\AppRole.cs" />
     <Compile Include="Entities\User\AppUser.cs" />
