@@ -49,9 +49,33 @@ namespace Transport.Infrastructure.Data.Queries
 		/// <param name="_db"></param>
 		/// <param name="condition"></param>
 		/// <returns></returns>
-		public static IEnumerable<AppUserRoleLevelModel> GetAll(TransportDbContext _db, Func<AppUserRoleLevelModel, bool> condition)
+		public static IEnumerable<AppUserRoleLevelModel> GetAll(TransportDbContext _db,
+			Func<AppUserRoleLevelModel, bool> condition, bool excludeAdminAndDriver = false)
 		{
-			return GetAll(_db).Where(condition);
+			var q1 = GetAll(_db).Where(condition);
+			if (!excludeAdminAndDriver) return q1;
+			else return q1.Where(m => m.Role.Name != "Driver" && m.Role.Name != "Admin");
+		}
+
+		/// <summary>
+		/// Get All Users With Higher Or Equal Level Except Admin, Driver, And Current User Itself
+		/// </summary>
+		/// <param name="_db"></param>
+		/// <param name="current"></param>
+		public static IEnumerable<AppUserRoleLevelModel> GetAllForOtherUsers(TransportDbContext _db, AppUserRoleLevelModel current)
+		{
+			return GetAll(_db, m => m.Level >= current.Level, true)
+				.Where(m => m.User.UserName != current.User.UserName);
+		}
+
+		/// <summary>
+		/// Get All Users With Higher Or Equal Level Except Admin, Driver, And Current User Itself
+		/// </summary>
+		/// <param name="_db"></param>
+		/// <param name="userName">Current User UserName</param>
+		public static IEnumerable<AppUserRoleLevelModel> GetAllForOtherUsers(TransportDbContext _db, string userName)
+		{
+			return GetAllForOtherUsers(_db, GetByUserName(_db, userName));
 		}
 
 		/// <summary>
