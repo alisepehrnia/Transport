@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Transport.Core.Entities.User;
@@ -43,6 +44,17 @@ namespace Transport.Infrastructure.Data.Queries
 		}
 
 		/// <summary>
+		/// Get All AppUserRoleLevelModel's Wich Satisfy <paramref name="condition"/>
+		/// </summary>
+		/// <param name="_db"></param>
+		/// <param name="condition"></param>
+		/// <returns></returns>
+		public static IEnumerable<AppUserRoleLevelModel> GetAll(TransportDbContext _db, Func<AppUserRoleLevelModel, bool> condition)
+		{
+			return GetAll(_db).Where(condition);
+		}
+
+		/// <summary>
 		/// Single Or Default AppUserRoleLevelModel By UserName
 		/// </summary>
 		/// <param name="_db"></param>
@@ -63,7 +75,7 @@ namespace Transport.Infrastructure.Data.Queries
 		/// <returns>IEnumerable<AppUserRoleLevelModel></returns>
 		public static IEnumerable<AppUserRoleLevelModel> GetHigherLevels(TransportDbContext _db, int level)
 		{
-			return GetAll(_db).Where(u => u.Level > level);
+			return GetAll(_db, u => u.Level > level);
 		}
 
 		/// <summary>
@@ -75,7 +87,7 @@ namespace Transport.Infrastructure.Data.Queries
 		/// <returns>IEnumerable<AppUserRoleLevelModel></returns>
 		public static IEnumerable<AppUserRoleLevelModel> GetLowerLevels(TransportDbContext _db, int level)
 		{
-			return GetAll(_db).Where(u => u.Level < level);
+			return GetAll(_db, u => u.Level < level);
 		}
 
 		/// <summary>
@@ -86,7 +98,7 @@ namespace Transport.Infrastructure.Data.Queries
 		/// <returns></returns>
 		public static IEnumerable<AppUserRoleLevelModel> GetByRoleName(TransportDbContext _db, string roleName)
 		{
-			return GetAll(_db).Where(u => u.Role.Name == roleName);
+			return GetAll(_db, u => u.Role.Name == roleName);
 		}
 
 		/// <summary>
