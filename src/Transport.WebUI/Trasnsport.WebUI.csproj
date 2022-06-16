@@ -243,6 +243,8 @@
     <Content Include="Views\TransportRequests\Edit.cshtml" />
     <Content Include="Views\TransportRequests\Index.cshtml" />
     <Content Include="Views\TransportRequests\_DetailPartial.cshtml" />
+    <Content Include="Views\TransportRequests\Confirmation.cshtml" />
+    <Content Include="Views\TransportRequests\ConfirmOrReject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

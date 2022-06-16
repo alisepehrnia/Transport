@@ -1,0 +1,68 @@
+﻿@using Transport.Core.Enums
+
+@model IEnumerable<Transport.Core.Entities.Transport.TransportRequest>
+
+@{
+	ViewBag.Title = "بررسی درخواست‌ها";
+}
+
+<div class="d-flex justify-content-between gap-2 mb-3">
+	<h2>@ViewBag.Title</h2>
+</div>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.RequestId)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.User.UserName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.TravelDateTime)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Address)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.DateTime)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ConfirmState)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.RequestId)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.User.UserName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.TravelDateTime)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Address)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DateTime)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.ConfirmState)
+			</td>
+			<td>
+				@using (Html.BeginForm("ConfirmOrReject", "TransportRequests", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+				{
+					@Html.AntiForgeryToken()
+					@Html.ActionLink("قبول", "ConfirmOrReject", new { id = item.RequestId, state = RequestState.Confirmed });
+					<span> | </span>
+					@Html.ActionLink("رد", "ConfirmOrReject", new { id = item.RequestId, state = RequestState.Rejected });
+				}
+			</td>
+		</tr>
+	}
+</table>

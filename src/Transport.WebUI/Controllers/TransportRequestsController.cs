@@ -4,6 +4,13 @@ using System.Web.Mvc;
 using Transport.Core.Entities.Transport;
 using Transport.Infrastructure.Data.DataAccess;
 using Transport.Infrastructure.Data;
+using System.Linq;
+using Transport.Core.Enums;
+using Transport.Core.Constants;
+using Transport.Core.Extensions;
+using System.Collections.Generic;
+using Transport.Core.Entities.User;
+using Transport.Infrastructure.Data.Queries;
 
 namespace Trasnsport.WebUI.Controllers
 {
@@ -20,11 +27,60 @@ namespace Trasnsport.WebUI.Controllers
 			Repo = new TRequestRepo(db);
 		}
 
+		/// <summary>
+		/// Checks If Current HttpContext User Is Authorized To Do appTask Or Not
+		/// </summary>
+		public bool Authorized(AppTasks appTask)
+		{
+			return HttpContext.User.IsInRoles(PremissionConstants.GetPremissionRoleNames(appTask).ToArray());
+		}
+
+		/// <summary>
+		/// Checks If Current HttpContext User Is Authorized To Do Transport Request Confirmation
+		/// </summary>
+		public ActionResult AuthorizeConfirmation(out bool isAuthorized)
+		{
+			isAuthorized = false;
+			if (!Authorized(AppTasks.ConfirmTransportRequest)) return new HttpUnauthorizedResult();
+			isAuthorized = true;
+			return null;
+		}
+
 		// GET: TransportRequests
 		// Lists All Requests
 		public async Task<ActionResult> Index()
 		{
 			return View(Repo.GetByUserName(UserName));
+		}
+
+		// GET: TransportRequests/Confirmation
+		// Lists All TransportRequests To Confirm
+		public async Task<ActionResult> Confirmation()
+		{
+			var authorize = AuthorizeConfirmation(out bool isAuthorized);
+			if (!isAuthorized) return authorize;
+			if (!Authorized(AppTasks.ConfirmTransportRequest)) return new HttpUnauthorizedResult();
+			return View(Repo.GetByConfirmCurrentStateUserName(UserName));
+		}
+
+		// GET: TransportRequests/ConfirmOrReject/5
+		public async Task<ActionResult> ConfirmOrReject(int id, RequestState state)
+		{
+			if (!Authorized(AppTasks.ConfirmTransportRequest)) return new HttpUnauthorizedResult();
+			var result = await Confirmation(id, state);
+			ViewBag.Succeed = result >= 0;
+			return View();
+		}
+
+		[NonAction]
+		private async Task<int> Confirmation(int confirmId, RequestState state)
+		{
+			var request = await Repo.GetByIdAsync(confirmId);
+			if (HttpContext.User.Identity.Name != request.ConfirmChain.ConfirmChainState.User.UserName) return -1;
+			var confirm = request.ConfirmChain.Confirms.SingleOrDefault(c => c.State == RequestState.Initial && (c.ConfirmId == confirmId || c.ConfirmId != confirmId));
+			confirm.State = state;
+			db.Entry(confirm).State = EntityState.Modified;
+			return await db.SaveChangesAsync();
 		}
 
 		// GET: TransportRequests/Details/5
@@ -42,6 +98,16 @@ namespace Trasnsport.WebUI.Controllers
 		// GET: TransportRequests/Create
 		public ActionResult Create()
 		{
+			if (!Authorized(AppTasks.CreateTransportRequest)) return new HttpUnauthorizedResult();
+			var current = AppUserRoleLevelQueries.GetByUserName(db, UserName);
+			var lowerOrEqualLevelUsers = AppUserRoleLevelQueries.GetAll(db, m => m.Level >= current.Level);
+			var OtherUsersList = lowerOrEqualLevelUsers.Select(u => new SelectListItem()
+			{
+				Text = u.User.UserName,
+				Value = u.User.UserName
+			}).ToList();
+			ViewBag.OtherUsersList = OtherUsersList;
+
 			return View();
 		}
 
@@ -51,8 +117,11 @@ namespace Trasnsport.WebUI.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Create([Bind(Include = "TravelDateTime,Address")] TransportRequest req)
 		{
+			if (!Authorized(AppTasks.CreateTransportRequest)) return new HttpUnauthorizedResult();
+			//To Bypass Request.User == null Error
 			ModelState["User"].Errors.Clear();
 			var request = Repo.Create(UserName, req.TravelDateTime, req.Address);
+			req.OtherUsers = new List<AppUser>() { db.Users.SingleOrDefault(u => u.UserName == "employee") };
 			if (ModelState.IsValid)
 			{
 				await Repo.AddAsync(request);
@@ -63,6 +132,7 @@ namespace Trasnsport.WebUI.Controllers
 		}
 
 		// GET: TransportRequests/Edit/5
+		[NonAction]
 		public async Task<ActionResult> Edit(int? id)
 		{
 			var check = Repo.CheckExist(id);
@@ -77,15 +147,16 @@ namespace Trasnsport.WebUI.Controllers
 		// POST: TransportRequests/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Edit([Bind(Include = "RequestId,TravelDateTime,Address,DateTime")] TransportRequest transportRequest)
+		[NonAction]
+		public async Task<ActionResult> Edit([Bind(Include = "RequestId,TravelDateTime,Address,DateTime")] TransportRequest req)
 		{
 			if (ModelState.IsValid)
 			{
-				db.Entry(transportRequest).State = EntityState.Modified;
+				db.Entry(req).State = EntityState.Modified;
 				await db.SaveChangesAsync();
 				return RedirectToAction("Index");
 			}
-			return View(transportRequest);
+			return View(req);
 		}
 
 		// GET: TransportRequests/Delete/5

@@ -21,5 +21,13 @@ namespace Transport.Core.Extensions
 		{
 			return userRoles.Any(ur => principal.IsInRole(ur));
 		}
+
+		/// <summary>
+		/// Checks Wether A Pricincipal Is In Any Of Role Names Or Not
+		/// </summary>
+		public static bool IsInRoles(this IPrincipal principal, params string[] userRoleNames)
+		{
+			return userRoleNames.Any(r => principal.IsInRole(r));
+		}
 	}
 }
