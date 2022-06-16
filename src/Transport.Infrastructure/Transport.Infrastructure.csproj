@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202206101546312_RemoveUserInfo.designer.cs">
       <DependentUpon>202206101546312_RemoveUserInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206160701205_AddOtherUsersToTransportRequest.cs" />
+    <Compile Include="Migrations\202206160701205_AddOtherUsersToTransportRequest.designer.cs">
+      <DependentUpon>202206160701205_AddOtherUsersToTransportRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\Identity\IdentityTokenClaimService.cs" />
     <Compile Include="Logging\LoggerAdapter.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206101546312_RemoveUserInfo.resx">
       <DependentUpon>202206101546312_RemoveUserInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206160701205_AddOtherUsersToTransportRequest.resx">
+      <DependentUpon>202206160701205_AddOtherUsersToTransportRequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
