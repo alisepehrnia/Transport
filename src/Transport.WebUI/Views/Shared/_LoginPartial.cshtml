@@ -10,7 +10,7 @@
 	<div class="dropdown ltr">
 		<a href="" class="dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 			<i class="bi bi-person-circle fs-2 mx-1"></i>
-			@Html.Encode(User.Identity.GetUserName())
+			@User.Identity.GetUserName()
 		</a>
 
 		<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
