@@ -19,6 +19,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ADE63333-FC76-4A7E-844F-EEC980F82FE0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DDFF5453-2B21-4332-9F39-AA1A8C3FF1B2}"
+	ProjectSection(SolutionItems) = preProject
+		Guide.txt = Guide.txt
+		ToDo.txt = ToDo.txt
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trasnsport.WebUI", "src\Transport.WebUI\Trasnsport.WebUI.csproj", "{A00E17B9-39A4-4468-B4EE-72EC8884B823}"
 EndProject
