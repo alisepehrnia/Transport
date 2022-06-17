@@ -216,6 +216,7 @@
     <Content Include="Assets\packages\jquery\jquery.slim.min.js" />
     <Content Include="Assets\packages\modernizr\modernizr.min.js" />
     <Content Include="Assets\packages\vazir-font\font-face.min.css" />
+    <Content Include="Assets\sass\table.scss" />
     <None Include="Assets\sass\typography.scss" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

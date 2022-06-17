@@ -17,6 +17,8 @@ namespace Transport.Core.Entities.Transport
 		/// DateTime To Travel
 		/// </summary>
 		[Required]
+		[DataType(DataType.DateTime, ErrorMessage = "فرمت وارد شده نادرست است")]
+		[DisplayFormat(ApplyFormatInEditMode = true)]
 		[Display(Name = "زمان حرکت")]
 		public DateTime TravelDateTime { get; set; }
 

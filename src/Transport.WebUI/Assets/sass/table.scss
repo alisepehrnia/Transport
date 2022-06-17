@@ -1,0 +1,15 @@
+﻿table {
+    border-collapse: collapse;
+}
+
+.table > :not(caption) > * > * {
+    box-shadow: none !important;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table {
+    td, th {
+        padding: 1rem;
+    }
+}

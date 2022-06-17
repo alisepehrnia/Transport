@@ -27,15 +27,15 @@
 
 		<div class="form-group">
 			@Html.LabelFor(model => model.TravelDateTime, htmlAttributes: new { @class = labelClasses })
-			<div class="col-3">
-				@Html.EditorFor(model => model.TravelDateTime, new { htmlAttributes = new { @class = inputClasses } })
+			<div class="col-6 col-sm-4 col-md-3 col-lg-2">
+				@Html.EditorFor(model => model.TravelDateTime, new { htmlAttributes = new { @class = inputClasses, type = "time" } })
 				@Html.ValidationMessageFor(model => model.TravelDateTime, "", new { @class = validationMessageClasses })
 			</div>
 		</div>
 
 		<div class="form-group">
 			@Html.LabelFor(model => model.Address, htmlAttributes: new { @class = labelClasses })
-			<div class="col-9">
+			<div class="col-12 col-md-10">
 				@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
 				@Html.ValidationMessageFor(model => model.Address, "", new { @class = validationMessageClasses })
 			</div>
