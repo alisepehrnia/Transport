@@ -17,26 +17,58 @@
 				</li>
 			}
 
+			@helper CollapsingLinkGenerator(string name, string text, string iconName, List<Tuple<string, string, bool>> innerLinks)
+			{
+				if (innerLinks != null && innerLinks.Any(l => l.Item3))
+				{
+					<li class="nav-item">
+						<a class="nav-link" @*data-bs-toggle="collapse"*@ data-bs-target="#@name-collapse" aria-expanded="true">
+							<i class="bi bi-@iconName-fill fs-5"></i>
+							@text
+						</a>
+
+						<div class="collapse show" id="@name-collapse">
+							<ul class="btn-toggle-nav sidebar-collapse small list-unstyled">
+								@foreach (var link in innerLinks.Where(l => l.Item3))
+								{
+									<li>
+										<a href="@link.Item2" class="link-dark">
+											@link.Item1
+										</a>
+									</li>
+								}
+							</ul>
+						</div>
+					</li>
+				}
+			}
+
+			@{
+				var canCreate = Context.User.HavePremission(AppTasks.CreateTransportRequest);
+				var canConfirm = Context.User.HavePremission(AppTasks.ConfirmTransportRequest);
+				var canRegister = Context.User.HavePremission(AppTasks.CreateUser);
+			}
+
 			@LinkGenerator("صفحه اصلی", "house", Url.Action("Index", "Home"))
 
-			<!-- Show Links To See/Create Requests For Users With Request Premission: Manager, MiddleManager & Employee -->
-			@if (Context.User.HavePremission(AppTasks.CreateTransportRequest))
-			{
-				@LinkGenerator("درخواست جدید", "plus-circle", Url.Action("Create", "TransportRequests"))
-				@LinkGenerator("درخواست‌ها", "archive", Url.Action("Index", "TransportRequests"))
-			}
+			@* Show Links To See/Create Requests For Users With Request Premission: Manager, MiddleManager & Employee *@
+			@* Show Links To Confirmable Requests For Users Who Are Responsible For Confirmation: Manager & MiddleManager *@
+			@CollapsingLinkGenerator("Requests", "درخواست‌ها", "archive", new List<Tuple<string, string, bool>>()
+		 {
+					 new Tuple<string, string, bool>
+					 ("درخواست جدید", Url.Action("Create", "TransportRequests"), canCreate),
+					 new Tuple<string, string, bool>
+					 ("درخواست‌های من", Url.Action("Index", "TransportRequests"), canCreate),
+					 new Tuple<string, string, bool>
+					 ("بررسی درخواست‌ها", Url.Action("Confirmation", "TransportRequests"), canConfirm),
+		 })
 
-			<!-- Show Confirmable Requests To Users Who Are Responsible For Confirmation: Manager & MiddleManager -->
-			@if (Context.User.HavePremission(AppTasks.ConfirmTransportRequest))
-			{
-				@LinkGenerator("بررسی درخواست‌ها", "hand-thumbs-up", Url.Action("Confirmation", "TransportRequests"))
-			}
-
-			<!-- Show New Account Link To Admin Role -->
-			@if (Context.User.HavePremission(AppTasks.CreateUser))
-			{
-				@LinkGenerator("کاربر جدید", "person-plus", Url.Action("Register", "Account"))
-			}
+			@* Show New Account Link To Admin Role *@
+			@CollapsingLinkGenerator("Users", "کاربران", "person", new List<Tuple<string, string, bool>>()
+		 {
+					 new Tuple<string, string, bool>
+					 ("کاربر جدید", Url.Action("Register", "Account"), canRegister),
+		 })
 
 		</ul>
 	</div>

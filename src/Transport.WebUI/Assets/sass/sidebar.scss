@@ -11,13 +11,22 @@
     border-left: $border-light-gray;
 
     .nav-link {
-        padding: 1rem;
+        padding: 0.75rem;
         color: $color-primary-dark;
         @include hover-opacity($dim-opacity);
 
         &:hover {
             background-color: $color-black-t-5;
         }
+    }
+}
+
+.sidebar-collapse {
+    padding: 1.25rem !important;
+    padding-top: 0.5rem !important;
+
+    li{
+        margin-bottom: 0.5rem;
     }
 }
 
