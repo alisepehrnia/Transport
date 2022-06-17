@@ -7,13 +7,13 @@ namespace Transport.Infrastructure.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Transport_User_FK_bug : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Transport_User_FK_bug));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "202206101542384_Transport_User_FK_bug"; }
+            get { return "202206170936168_initial"; }
         }
         
         string IMigrationMetadata.Source

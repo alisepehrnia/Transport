@@ -53,24 +53,12 @@
     <Compile Include="Data\Repositories\TRequestRepo.cs" />
     <Compile Include="Data\Repositories\TransportRepository.cs" />
     <Compile Include="Data\DataAccess\TransportDbContext.cs" />
-    <None Include="Migrations\202206101501377_TransportDbV1.cs" />
     <Compile Include="Data\AppUserRoleLevelModel.cs" />
     <Compile Include="Data\UserRoleLevelModel.cs" />
     <Compile Include="Data\Queries\AppUserRoleLevelQueries.cs" />
-    <Compile Include="Migrations\202206101501377_TransportDbV1.designer.cs">
-      <DependentUpon>202206101501377_TransportDbV1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206101542384_Transport_User_FK_bug.cs" />
-    <Compile Include="Migrations\202206101542384_Transport_User_FK_bug.designer.cs">
-      <DependentUpon>202206101542384_Transport_User_FK_bug.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206101546312_RemoveUserInfo.cs" />
-    <Compile Include="Migrations\202206101546312_RemoveUserInfo.designer.cs">
-      <DependentUpon>202206101546312_RemoveUserInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206160701205_AddOtherUsersToTransportRequest.cs" />
-    <Compile Include="Migrations\202206160701205_AddOtherUsersToTransportRequest.designer.cs">
-      <DependentUpon>202206160701205_AddOtherUsersToTransportRequest.cs</DependentUpon>
+    <Compile Include="Migrations\202206170936168_initial.cs" />
+    <Compile Include="Migrations\202206170936168_initial.designer.cs">
+      <DependentUpon>202206170936168_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\Identity\IdentityTokenClaimService.cs" />
@@ -125,17 +113,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202206101501377_TransportDbV1.resx">
-      <DependentUpon>202206101501377_TransportDbV1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206101542384_Transport_User_FK_bug.resx">
-      <DependentUpon>202206101542384_Transport_User_FK_bug.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206101546312_RemoveUserInfo.resx">
-      <DependentUpon>202206101546312_RemoveUserInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206160701205_AddOtherUsersToTransportRequest.resx">
-      <DependentUpon>202206160701205_AddOtherUsersToTransportRequest.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206170936168_initial.resx">
+      <DependentUpon>202206170936168_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,16 +1,15 @@
-﻿namespace Transport.Infrastructure.Migrations
-{
-	using System.Data.Entity.Migrations;
+﻿using System.Data.Entity.Migrations;
 
-	internal sealed class Configuration : DbMigrationsConfiguration<Transport.Infrastructure.Data.DataAccess.TransportDbContext>
+namespace Transport.Infrastructure.Migrations
+{
+	internal sealed class Configuration : DbMigrationsConfiguration<Data.DataAccess.TransportDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Transport.Infrastructure.Data.DataAccess.TransportDbContext";
         }
 
-        protected override void Seed(Transport.Infrastructure.Data.DataAccess.TransportDbContext context)
+        protected override void Seed(Data.DataAccess.TransportDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
