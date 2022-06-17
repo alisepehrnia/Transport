@@ -91,7 +91,7 @@ namespace Trasnsport.WebUI.Controllers
 			switch (result)
 			{
 				case SignInStatus.Success:
-					return RedirectToLocal(returnUrl);
+					return RedirectToLocalOrHome(returnUrl);
 				case SignInStatus.LockedOut:
 					return View("Lockout");
 				case SignInStatus.Failure:
@@ -173,18 +173,5 @@ namespace Trasnsport.WebUI.Controllers
 
 			base.Dispose(disposing);
 		}
-
-		#region Helpers
-
-		private ActionResult RedirectToLocal(string returnUrl)
-		{
-			if (Url.IsLocalUrl(returnUrl))
-			{
-				return Redirect(returnUrl);
-			}
-			return RedirectToAction("Index", "Home");
-		}
-
-		#endregion
 	}
 }
