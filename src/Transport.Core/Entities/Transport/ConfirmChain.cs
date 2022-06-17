@@ -16,7 +16,6 @@ namespace Transport.Core.Entities.Transport
 	{
 		public ConfirmChain()
 		{
-			Confirms = new HashSet<TConfirm>();
 		}
 
 		public int ConfirmChainId { get; set; }
@@ -29,11 +28,11 @@ namespace Transport.Core.Entities.Transport
 		/// <summary>
 		/// Is Any Rejected
 		/// </summary>
-		public bool IsRejected => Confirms.Any(c => c.IsRejected);
+		public bool IsRejected => Confirms?.Any(c => c.IsRejected) ?? false;
 		/// <summary>
 		/// Is All Confirmed
 		/// </summary>
-		public bool IsConfirmed => Confirms.All(c => c.IsConfirmed);
+		public bool IsConfirmed => Confirms?.All(c => c.IsConfirmed) ?? false;
 		/// <summary>
 		/// Not Any Rejected Nor All Confirmed
 		/// </summary>
@@ -56,7 +55,7 @@ namespace Transport.Core.Entities.Transport
 		/// <summary>
 		/// First Confirm In The Chain Which Is Not Confirmed Nor Rejected (First Or Default Confirm With Highest Priority Wich Is Initial)
 		/// </summary>
-		public TConfirm ConfirmChainState => Confirms.OrderByDescending(c => c.Priority)
+		public TConfirm ConfirmChainState => Confirms?.OrderByDescending(c => c.Priority)
 			.FirstOrDefault(c => c.IsInitial);
 	}
 }

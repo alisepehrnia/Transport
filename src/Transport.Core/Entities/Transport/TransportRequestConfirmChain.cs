@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Transport.Core.Entities.User;
 
 namespace Transport.Core.Entities.Transport
@@ -20,6 +21,7 @@ namespace Transport.Core.Entities.Transport
 		/// <param name="higherLevelUsers"></param>
 		public TransportRequestConfirmChain(TransportRequest request, IEnumerable<Tuple<AppUser, int>> higherLevelUsers)
 		{
+			if (higherLevelUsers.Any()) Confirms = new HashSet<TransportRequestConfirm>();
 			foreach (var userLevel in higherLevelUsers)
 			{
 				Confirms.Add(new TransportRequestConfirm(userLevel.Item1, request, userLevel.Item2));
