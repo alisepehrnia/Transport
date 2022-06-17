@@ -16,7 +16,7 @@
 		<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
 			@if (Context.User.HavePremission(AppTasks.CreateTransportRequest))
 			{
-				<li>@Html.ActionLink("سفر جدید...", "Request", controllerName: "Travel", routeValues: null, htmlAttributes: new { @class = dropdownItemClasses })</li>
+				<li>@Html.ActionLink("سفر جدید...", "Create", controllerName: "TransportRequests", routeValues: null, htmlAttributes: new { @class = dropdownItemClasses })</li>
 				<li><hr class="dropdown-divider"></li>
 				}
 			@*<li>@Html.ActionLink("پروفایل", "Index", controllerName: "Manage", routeValues: null, htmlAttributes: new { @class = dropdownItemClasses })</li>*@
