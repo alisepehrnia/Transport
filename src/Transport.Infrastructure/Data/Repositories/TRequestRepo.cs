@@ -22,8 +22,7 @@ namespace Transport.Infrastructure.Data
 		protected readonly TransportDbContext _db;
 		public DbSet<TransportRequest> Requests => _db.TransportRequests;
 		public IQueryable<TransportRequest> RequestsQ =>
-			_db.TransportRequests.Include(r => r.ConfirmChain.Confirms)
-			.Include(r => r.OtherUsers);
+			_db.TransportRequests.Include(r => r.ConfirmChain.Confirms);
 
 		public TRequestRepo(TransportDbContext db) : base(db)
 		{

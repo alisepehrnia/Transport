@@ -41,14 +41,14 @@
 			</div>
 		</div>
 
-		@if (ViewBag.OtherUsersListItems != null && ((IEnumerable<SelectListItem>)ViewBag.OtherUsersListItems).Any())
+		@*@if (ViewBag.OtherUsersListItems != null && ((IEnumerable<SelectListItem>)ViewBag.OtherUsersListItems).Any())
 		{
 			<div class="form-group">
 				@Html.LabelFor(model => model.OtherUsers, htmlAttributes: new { @class = labelClasses })
 				<div class="col-4">
 					@{
-						Expression<Func<TransportRequest, ICollection<AppUser>>> exp = model => model.OtherUsers;
-						var lstBox = SelectExtensions.ListBoxFor<TransportRequest, ICollection<AppUser>>
+						Expression<Func<TransportRequest, AppUser>> exp = model => model.OtherUser;
+						var lstBox = SelectExtensions.ListBoxFor<TransportRequest, AppUser>
 								(Html, exp, ViewBag.OtherUsersListItems);
 
 						@Html.Raw(lstBox)
@@ -56,7 +56,7 @@
 					@Html.ValidationMessageFor(model => model.OtherUsers, "", new { @class = validationMessageClasses })
 				</div>
 			</div>
-		}
+		}*@
 
 		<div class="form-group">
 			<input type="submit" value="ثبت درخواست" class="btn btn-primary btn-t-primary" />

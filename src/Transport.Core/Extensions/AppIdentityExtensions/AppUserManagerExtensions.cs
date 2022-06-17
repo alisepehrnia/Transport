@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Transport.Core.Entities.User;
 
@@ -56,6 +58,24 @@ namespace Transport.Core.Extensions.AppIdentityExtensions
 
 			if(user == null) user = await userManager.FindByNameAsync(username);
 			return await userManager.AddToRoleAsync(user.Id, roleName);
+		}
+
+		/// <summary>
+		/// Get AppUser's By Provided <paramref name="userNames"/>
+		/// </summary>
+		/// <returns>IEnumerable<AppUser></returns>
+		public static IEnumerable<AppUser> GetByUserNamesAsync(this UserManager<AppUser, string> userManager, string[] userNames)
+		{
+			return userNames.Select(userName => userManager.FindByName(userName));
+		}
+
+		/// <summary>
+		/// Get AppUser By Provided <paramref name="userName"/>
+		/// </summary>
+		/// <returns>AppUser</returns>
+		public static AppUser GetByUserNameAsync(this UserManager<AppUser, string> userManager, string userName)
+		{
+			return userManager.FindByName(userName);
 		}
 	}
 }

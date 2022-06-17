@@ -20,7 +20,7 @@ namespace Trasnsport.WebUI.Controllers
 		private readonly TRequestRepo Repo;
 		private string UserName => HttpContext.User.Identity.Name;
 
-		public TransportRequestsController()
+		public TransportRequestsController() 
 		{
 			Repo = new TRequestRepo(db);
 		}
@@ -96,7 +96,7 @@ namespace Trasnsport.WebUI.Controllers
 		// Creates New Request
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Create([Bind(Include = "TravelDateTime,Address,OtherUsers")] TransportRequest req)
+		public async Task<ActionResult> Create([Bind(Include = "TravelDateTime,Address")] TransportRequest req)
 		{
 			if (!Authorized(AppTasks.CreateTransportRequest)) return new HttpUnauthorizedResult();
 			//To Bypass Request.User == null Error

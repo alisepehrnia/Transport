@@ -27,11 +27,11 @@ namespace Transport.Core.Entities.Transport
 		[Display(Name = "آدرس")]
 		public string Address { get; set; }
 
-		[Display(Name = "کاربران همراه")]
-		/// <summary>
-		/// Users Who Are Going To Travel With This Request (Except The Requester)
-		/// </summary>
-		public ICollection<AppUser> OtherUsers { get; set; } //Commented Because Of EF Model Building Errors
+		//[Display(Name = "کاربران همراه")]
+		///// <summary>
+		///// Users Who Are Going To Travel With This Request (Except The Requester)
+		///// </summary>
+		//public ICollection<AppUser> OtherUsers { get; set; } //Commented Because Of EF Model Building Errors
 
 		public TransportRequestConfirmChain ConfirmChain { get; set; }
 
