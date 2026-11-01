@@ -1,1 +1,22 @@
 private in-organization uber c# web application
+
+0- Set Connection String (TransportConnectionString) In Transport.Infrastructure Web.config
+
+1- Run ~/Account/AddUsers To Seed The Database With Default Users.
+
+Default Users (UserName | Password | Role Name | Role Level):
+	* admin | admin | Admin | -10 (Can Create Users)
+	* manager | manager | Manager | 10 (Can Create Request & Confrim/Reject Requests)
+	* middlemanager | middlemanager | MiddleManager | 20 (Can Create Request & Confrim/Reject Requests)
+	* employee | employee | Employee | 30 (Can Create Request)
+	* driver | driver | Driver | 40 (Can See Confirmed Requests But Not Implemented Yet!)
+
+2- Login Using ~/Account/Login
+
+3- Add Transport Request Through ~/TransportRequests/Create
+
+4- See All Of Your Transport Request's Through ~/TransportRequests
+
+5- Just As Manager & MiddleManager: See, Confirm Or Reject Transport Requests Of Higher Level Users Through ~/TransportRequests/Confirmation
+
+6- Just As Admin: Create New Users Through ~/Account/Register Page
